@@ -6,7 +6,21 @@
     step 2: the providers array in config/app.php
     Barryvdh\LaravelIdeHelper\IdeHelperServiceProvider::class,
 
-    step 3:
+    step 3: 在composer.json 中添加
+    "scripts":{
+        "post-update-cmd": [
+            "php artisan clear-compiled",
+            "php artisan ide-helper:generate",
+            "php artisan ide-helper:meta",
+            "php artisan optimize"
+        ]
+    }
+
+    step 4:
+    php artisan vendor:publish --provider="Barryvdh\LaravelIdeHelper\IdeHelperServiceProvider" --tag=config
+
+    step 5:
+    php artisan ide-helper:generate
 ```
 
 4. 配置github
@@ -80,12 +94,17 @@
     artisan make:policy --model=[Name] [NamePolicy]
 ```
 
-12. laravel 自带用户认证使用 - 安装
+12. laravel 自带用户认证使用 - 安装 || Laravel 项目中使用 Bootstrap 前端框架
 ```
     composer require laravel/ui
-    php artisan ui vue --auth
+    php artisan ui vue --auth    (部分项目: php artisan ui vue)
     npm install
 ```
+- 以上命令做了以下事情：
+1. 在 npm 依赖配置文件 package.json 中引入 bootstrap、jquery、popper.js、vue 作为依赖；
+2. 修改 resources/js/bootstrap.js ，在此文件中初始化 Bootstrap UI 框架的 JS 部分；
+3. 修改 resources/sass/app.scss 以加载 Bootstrap 的样式文件；
+4. 新增 resources/sass/_variables.scss 样式配置文件。
 
 13. laravel扩展实现用户角色权限管理
 ```
@@ -169,4 +188,6 @@
 ```
     composer config -g repo.packagist composer https://mirrors.aliyun.com/composer/
 ```
+
+18.
 
