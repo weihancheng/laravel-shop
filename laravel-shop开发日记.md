@@ -189,5 +189,25 @@
     composer config -g repo.packagist composer https://mirrors.aliyun.com/composer/
 ```
 
-18.
+18. git 版本回退
+```
+  回退到当前版本:
+  git reset --hard
+  回退一个版本（将版本退回上一个commit的状态）：
+  git reset --hard HEAD^
+  回退两个版本：
+  git reset --hard HEAD^^
+  回退100个版本：
+  git reset --hard HEAD~100
+  回退到指定版本：
+  git reset --hard 版本号
+  查看版本号:
+  git log
+```
+
+19. 添加Models并把User放到Models时报错
+```
+    修改RegisterController 和 config/auth.php
+    修改User.php的命名空间
+```
 
