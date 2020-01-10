@@ -16,5 +16,10 @@ Route::get('/', 'PagesController@root')->name('root');
 Auth::routes(['verify' => true]);
 
 Route::group(['middleware' => ['auth', 'verified']], function() {
+	// 列表页
 	Route::get('user_addresses', 'UserAddressesController@index')->name('user_addresses.index');
+	// 创建收货地址
+	Route::get('user_addresses/create', 'UserAddressesController@create')->name('user_addresses.create');
+	// 新增收货地址逻辑
+	Route::post('user_addresses', 'UserAddressesController@store')->name('user_addresses.store');
 });
