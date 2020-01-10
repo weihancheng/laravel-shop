@@ -211,3 +211,14 @@
     修改User.php的命名空间
 ```
 
+
+20. encore/laravel-admin 安装
+```
+    composer require encore/laravel-admin "1.7.7"
+
+    php artisan vendor:publish --provider="Encore\Admin\AdminServiceProvider"
+
+    php artisan admin:install
+
+    php artisan config:clear
+```
