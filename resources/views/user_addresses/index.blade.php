@@ -28,8 +28,8 @@
                                 <td>{{ $address->zip }}</td>
                                 <td>{{ $address->contact_phone }}</td>
                                 <td>
-                                    <button class="btn btn-primary">修改</button>
-                                    <button class="btn btn-danger">删除</button>
+                                    <a class="btn btn-primary" href="{{ route('user_addresses.edit', ['user_address' => $address->id]) }}">修改</a>
+                                    <button class="btn btn-danger btn-del-address" type="button" data-id="{{ $address->id }}">删除</button>
                                 </td>
                             </tr>
                         @endforeach
@@ -39,4 +39,30 @@
             </div>
         </div>
     </div>
+@endsection
+@section('scriptsAfterJs')
+    <script>
+        $(document).ready(function () {
+            $('.btn-del-address').click(function () {
+                // 获取按钮上的 data-id 属性的值, 也就是地址id
+                var id = $(this).data('id');
+                // 调用sweetalert
+                swal({
+                    title: "确定要删除改地址吗?",
+                    icon: "warning",
+                    buttons: ['取消', '确定'],
+                    dangerMode: true
+                }).then(function (willDelete) { // 用户点击按钮会触发这个回调函数
+                    // willDelete 为 true, 否则为false
+                    if (!willDelete) {
+                        return;
+                    }
+                    axios.delete('/user_addresses/' + id).then(function () {
+                        // 请求
+                        location.reload();
+                    })
+                })
+            })
+        })
+    </script>
 @endsection
