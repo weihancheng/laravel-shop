@@ -35,6 +35,8 @@ Route::group(['middleware' => ['auth', 'verified']], function() {
     Route::delete('products/{product}/favorite', 'ProductsController@disfavor')->name('products.disfavor');
     // 收藏列表
     Route::get('products/favorites', 'ProductsController@favorites')->name('products.favorites');
+    // 购物车添加商品
+    Route::post('cart', 'CartController@add')->name('cart.add');
 });
 
 // 这里和其他路由产生冲突

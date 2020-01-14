@@ -81,6 +81,7 @@
                 $('.product-info .stock').text('库存：' + $(this).data('stock') + '件');
             })
 
+            // 收藏事件
             $('.btn-favor').click(function() {
                 axios.post('{{ route('products.favor', ['product' => $product->id]) }}')
                     .then(function () {
@@ -98,6 +99,7 @@
                     })
             });
 
+            // 取消收藏事件
             $('.btn-disfavor').click(function() {
                 axios.delete('{{ route('products.favor', ['product' => $product->id]) }}')
                     .then(function () {
@@ -105,6 +107,31 @@
                             location.reload();
                         });
                     })
+            });
+
+            // 加入购物车事件
+            $('.btn-add-to-cart').click(function() {
+                // 请求加入购物车接口
+                axios.post('{{ route('cart.add') }}', {
+                    sku_id: $('label.active input[name=skus]').val(),
+                    amount: $('.cart_amount input').val()
+                }).then(function () {
+                    swal('加入购物车成功', '', 'success');
+                }, function (error) {
+                    if (error.response && error.response.status === 401) {
+                        swal('请先登录', '', 'error');
+                    } else if (error.response.status === 422) {
+                        var html = '<div>';
+                        _.each(error.response.data.errors, function (errors) {
+                            _.each(errors, function (error) {
+                                html += error + '<br>';
+                            })
+                        });
+                        swal({content: $(html)[0], icon: 'error'});
+                    } else {
+                        swal('系统错误', '', 'error');
+                    }
+                })
             });
         })
     </script>
