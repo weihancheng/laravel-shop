@@ -60,7 +60,7 @@ class ProductsController extends Controller
 		    $favored = boolval($user->favoriteProducts()->find($product->id));
         }
 
-		return view('products.show', ['product' => $product, 'favored' => $favored]);
+		return view('products.show', compact('product', 'favored'));
 	}
 
 	// 商品收藏
@@ -84,5 +84,8 @@ class ProductsController extends Controller
         return [];
 	}
 
-
+    public function favorites(Request $request) {
+        $products = $request->user()->favoriteProducts()->paginate(16);
+        return view('products.favorites', compact('products'));
+    }
 }

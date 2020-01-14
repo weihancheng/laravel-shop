@@ -13,7 +13,6 @@
 
 Route::redirect('/', '/products')->name('root');
 Route::get('products', 'ProductsController@index')->name('products.index');
-Route::get('products/{product}', 'ProductsController@show')->name('products.show');
 
 Auth::routes(['verify' => true]);
 
@@ -34,4 +33,9 @@ Route::group(['middleware' => ['auth', 'verified']], function() {
     Route::post('products/{product}/favorite', 'ProductsController@favor')->name('products.favor');
     // 取消收藏商品
     Route::delete('products/{product}/favorite', 'ProductsController@disfavor')->name('products.disfavor');
+    // 收藏列表
+    Route::get('products/favorites', 'ProductsController@favorites')->name('products.favorites');
 });
+
+// 这里和其他路由产生冲突
+Route::get('products/{product}', 'ProductsController@show')->name('products.show');
