@@ -8,12 +8,12 @@ use Illuminate\Foundation\Exceptions\Handler as ExceptionHandler;
 class Handler extends ExceptionHandler
 {
     /**
-     * A list of the exception types that are not reported.
+     * A list of the exception types that are not reported. 不需要写入日志的异常
      *
      * @var array
      */
     protected $dontReport = [
-        //
+        InvalidRequestException::class
     ];
 
     /**
