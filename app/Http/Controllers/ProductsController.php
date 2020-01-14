@@ -55,6 +55,34 @@ class ProductsController extends Controller
 			throw new InvalidRequestException('商品未上架');
 		}
 
-		return view('products.show', ['product' => $product]);
+		$favored = false;
+		if ($user = $request->user()) {
+		    $favored = boolval($user->favoriteProducts()->find($product->id));
+        }
+
+		return view('products.show', ['product' => $product, 'favored' => $favored]);
 	}
+
+	// 商品收藏
+    public function favor(Product $product, Request $request) {
+        $user = $request->user();
+        // 判断用户是否已经收藏了该商品
+        if ($user->favoriteProducts()->find($product->id)) {
+            return [];
+        }
+
+        // attach() 方法的参数可以是模型的 id，也可以是模型对象本身
+        $user->favoriteProducts()->attach($product);
+        return [];
+	}
+
+	// 取消商品收藏
+    public function disfavor(Product $product, Request $request) {
+        $user = $request->user();
+        // detach() 方法用于取消多对多的关联，接受的参数个数与 attach() 方法一致
+        $user->favoriteProducts()->detach($product);
+        return [];
+	}
+
+
 }

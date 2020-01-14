@@ -7,7 +7,7 @@
 |
 | Here is where you can register web routes for your application. These
 | routes are loaded by the RouteServiceProvider within a group which
-| contains the "web" middleware group. Now create something great!
+| contains the 'web' middleware group. Now create something great!
 |
 */
 
@@ -30,4 +30,8 @@ Route::group(['middleware' => ['auth', 'verified']], function() {
 	Route::put('user_addresses/{user_address}', 'UserAddressesController@update')->name('user_addresses.update');
 	// 删除逻辑
 	Route::delete('user_addresses/{user_address}', 'UserAddressesController@destroy')->name('user_addresses.destroy');
+	// 收藏商品
+    Route::post('products/{product}/favorite', 'ProductsController@favor')->name('products.favor');
+    // 取消收藏商品
+    Route::delete('products/{product}/favorite', 'ProductsController@disfavor')->name('products.disfavor');
 });
