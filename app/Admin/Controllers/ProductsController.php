@@ -6,7 +6,6 @@ use App\Models\Product;
 use Encore\Admin\Controllers\AdminController;
 use Encore\Admin\Form;
 use Encore\Admin\Grid;
-use Encore\Admin\Show;
 
 class ProductsController extends AdminController
 {
@@ -52,31 +51,6 @@ class ProductsController extends AdminController
     }
 
     /**
-     * Make a show builder.
-     *
-     * @param mixed $id
-     * @return Show
-     */
-    protected function detail($id)
-    {
-        $show = new Show(Product::findOrFail($id));
-
-        $show->field('id', __('Id'));
-        $show->field('title', __('Title'));
-        $show->field('description', __('Description'));
-        $show->field('image', __('Image'));
-        $show->field('on_sale', __('On sale'));
-        $show->field('rating', __('Rating'));
-        $show->field('sold_count', __('Sold count'));
-        $show->field('review_count', __('Review count'));
-        $show->field('price', __('Price'));
-        $show->field('created_at', __('Created at'));
-        $show->field('updated_at', __('Updated at'));
-
-        return $show;
-    }
-
-    /**
      * Make a form builder.
      *
      * @return Form
@@ -87,7 +61,7 @@ class ProductsController extends AdminController
 
         $form->text('title', '商品名称')->rules('required');
         $form->image('image', '封面图片')->rules('required|image'); //图片上传功能
-        $form->editor('description', '商品描述')->rules('required');   // 富文本编辑器
+        $form->quill('description', '商品描述')->rules('required');   // 富文本编辑器
 		$form->radio('on_sale', '上架')->options(['1' => '是', '0' => '否'])->default(0);
 
 		// 直接添加一对多的关联模型
