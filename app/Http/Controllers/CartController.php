@@ -33,7 +33,9 @@ class CartController extends Controller
 	public function index(Request $request)
 	{
 		$cartItems = $request->user()->cartItems()->with(['productSku.product'])->get();
-		return view('cart.index', compact('cartItems'));
+		// 通常来说用户重复使用最近用过的地址概率比较大，因此我们在取地址的时候根据 last_used_at 最后一次使用时间倒序排序，这样用户体验会好一些。
+		$addresses = $request->user()->addresses()->orderBy('last_used_at', 'desc')->get();
+		return view('cart.index', compact('cartItems', 'addresses'));
     }
 
     // 移除商品
