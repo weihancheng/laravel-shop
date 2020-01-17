@@ -10,7 +10,7 @@ Target Server Type    : MYSQL
 Target Server Version : 50728
 File Encoding         : 65001
 
-Date: 2020-01-14 17:50:09
+Date: 2020-01-17 16:54:28
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -60,7 +60,7 @@ CREATE TABLE `admin_operation_log` (
   `updated_at` timestamp NULL DEFAULT NULL,
   PRIMARY KEY (`id`),
   KEY `admin_operation_log_user_id_index` (`user_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=220 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=227 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 -- ----------------------------
 -- Records of admin_operation_log
@@ -284,6 +284,13 @@ INSERT INTO `admin_operation_log` VALUES ('216', '1', 'admin/products', 'GET', '
 INSERT INTO `admin_operation_log` VALUES ('217', '1', 'admin/products/2/edit', 'GET', '192.168.10.1', '{\"_pjax\":\"#pjax-container\"}', '2020-01-14 07:02:34', '2020-01-14 07:02:34');
 INSERT INTO `admin_operation_log` VALUES ('218', '1', 'admin/products/2', 'PUT', '192.168.10.1', '{\"title\":\"\\u5c0f\\u7c73\\u6d17\\u8863\\u673a1\\u4ee3\",\"description\":\"<p>\\u5168\\u5c4b\\u9996\\u4ed8,\\u9001\\u5b8c\\u5373\\u6b62<\\/p>\",\"on_sale\":\"0\",\"skus\":{\"3\":{\"title\":\"\\u767d\\u8272 2w\",\"description\":\"\\u5c0f\\u7c73\\u6d17\\u8863\\u673a1\\u4ee3 \\u767d\\u8272 2w\",\"price\":\"998.00\",\"stock\":\"1000\",\"id\":\"3\",\"_remove_\":\"0\"},\"4\":{\"title\":\"\\u9ed1\\u8272 12w\",\"description\":\"\\u5c0f\\u7c73\\u6d17\\u8863\\u673a1\\u4ee3 \\u9ed1\\u8272 12w\",\"price\":\"2999.00\",\"stock\":\"1000\",\"id\":\"4\",\"_remove_\":\"0\"}},\"_token\":\"zVZvu9TRzGZJurK7JEsjj5rRiXqAa7Qz3fVuvA2a\",\"_method\":\"PUT\",\"_previous_\":\"http:\\/\\/shop.test\\/admin\\/products\"}', '2020-01-14 07:02:40', '2020-01-14 07:02:40');
 INSERT INTO `admin_operation_log` VALUES ('219', '1', 'admin/products', 'GET', '192.168.10.1', '[]', '2020-01-14 07:02:40', '2020-01-14 07:02:40');
+INSERT INTO `admin_operation_log` VALUES ('220', '1', 'admin/products', 'GET', '192.168.10.1', '[]', '2020-01-16 02:42:24', '2020-01-16 02:42:24');
+INSERT INTO `admin_operation_log` VALUES ('221', '1', 'admin/products/5/edit', 'GET', '192.168.10.1', '{\"_pjax\":\"#pjax-container\"}', '2020-01-16 02:42:42', '2020-01-16 02:42:42');
+INSERT INTO `admin_operation_log` VALUES ('222', '1', 'admin/products/5', 'PUT', '192.168.10.1', '{\"title\":\"rerum\",\"description\":\"<p>Quidem eveniet error impedit quod voluptatem.<\\/p>\",\"on_sale\":\"0\",\"skus\":{\"11\":{\"title\":\"labore\",\"description\":\"Occaecati vel omnis adipisci sed repellendus laudantium assumenda.\",\"price\":\"3199.00\",\"stock\":\"58736\",\"id\":\"11\",\"_remove_\":\"0\"},\"12\":{\"title\":\"quis\",\"description\":\"Aspernatur sit odit sequi natus id voluptatem accusantium.\",\"price\":\"2744.00\",\"stock\":\"96554\",\"id\":\"12\",\"_remove_\":\"0\"},\"13\":{\"title\":\"ipsam\",\"description\":\"Tenetur ea alias omnis dolores et quaerat omnis.\",\"price\":\"4595.00\",\"stock\":\"35009\",\"id\":\"13\",\"_remove_\":\"0\"}},\"_token\":\"sk89RPboAeDJfvPQFwdx12j74cGqXIUQvEMZMVOj\",\"_method\":\"PUT\",\"_previous_\":\"http:\\/\\/shop.test\\/admin\\/products\"}', '2020-01-16 02:42:48', '2020-01-16 02:42:48');
+INSERT INTO `admin_operation_log` VALUES ('223', '1', 'admin/products', 'GET', '192.168.10.1', '[]', '2020-01-16 02:42:48', '2020-01-16 02:42:48');
+INSERT INTO `admin_operation_log` VALUES ('224', '1', 'admin/products/3/edit', 'GET', '192.168.10.1', '{\"_pjax\":\"#pjax-container\"}', '2020-01-16 03:05:39', '2020-01-16 03:05:39');
+INSERT INTO `admin_operation_log` VALUES ('225', '1', 'admin/products/3', 'PUT', '192.168.10.1', '{\"title\":\"sint\",\"description\":\"<p>Vitae facilis nesciunt accusamus saepe exercitationem.<\\/p>\",\"on_sale\":\"0\",\"skus\":{\"5\":{\"title\":\"quia\",\"description\":\"Odio ratione sed dolore qui.\",\"price\":\"8198.00\",\"stock\":\"81258\",\"id\":\"5\",\"_remove_\":\"0\"},\"6\":{\"title\":\"velit\",\"description\":\"Quia earum voluptatum atque mollitia provident pariatur.\",\"price\":\"8415.00\",\"stock\":\"80886\",\"id\":\"6\",\"_remove_\":\"0\"},\"7\":{\"title\":\"et\",\"description\":\"Nam commodi et excepturi fuga nihil.\",\"price\":\"3965.00\",\"stock\":\"98637\",\"id\":\"7\",\"_remove_\":\"0\"}},\"_token\":\"sk89RPboAeDJfvPQFwdx12j74cGqXIUQvEMZMVOj\",\"_method\":\"PUT\",\"_previous_\":\"http:\\/\\/shop.test\\/admin\\/products\"}', '2020-01-16 03:05:45', '2020-01-16 03:05:45');
+INSERT INTO `admin_operation_log` VALUES ('226', '1', 'admin/products', 'GET', '192.168.10.1', '[]', '2020-01-16 03:05:45', '2020-01-16 03:05:45');
 
 -- ----------------------------
 -- Table structure for admin_permissions
@@ -429,6 +436,29 @@ INSERT INTO `admin_users` VALUES ('1', 'admin', '$2y$10$frDquMgKzfIildevxq8CrO4P
 INSERT INTO `admin_users` VALUES ('2', 'operator', '$2y$10$OKRsCrk4TIdttSouDkVxauGbfWKNU0zKdxtW/ABsTSZZTHyQ/mAQW', '运维', null, 'X8u1CiW4fmnkxfNtSlZReMmp0kXxyZi0jybYukPWdeIe3W8fGUjBE5oZW49M', '2020-01-13 07:33:53', '2020-01-13 07:33:53');
 
 -- ----------------------------
+-- Table structure for cart_items
+-- ----------------------------
+DROP TABLE IF EXISTS `cart_items`;
+CREATE TABLE `cart_items` (
+  `id` bigint(20) unsigned NOT NULL AUTO_INCREMENT,
+  `user_id` bigint(20) unsigned NOT NULL,
+  `product_sku_id` bigint(20) unsigned NOT NULL,
+  `amount` int(10) unsigned NOT NULL,
+  PRIMARY KEY (`id`),
+  KEY `cart_items_user_id_foreign` (`user_id`),
+  KEY `cart_items_product_sku_id_foreign` (`product_sku_id`),
+  CONSTRAINT `cart_items_product_sku_id_foreign` FOREIGN KEY (`product_sku_id`) REFERENCES `product_skus` (`id`) ON DELETE CASCADE,
+  CONSTRAINT `cart_items_user_id_foreign` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`) ON DELETE CASCADE
+) ENGINE=InnoDB AUTO_INCREMENT=9 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+-- ----------------------------
+-- Records of cart_items
+-- ----------------------------
+INSERT INTO `cart_items` VALUES ('5', '1', '15', '4');
+INSERT INTO `cart_items` VALUES ('7', '1', '20', '1');
+INSERT INTO `cart_items` VALUES ('8', '1', '42', '1');
+
+-- ----------------------------
 -- Table structure for failed_jobs
 -- ----------------------------
 DROP TABLE IF EXISTS `failed_jobs`;
@@ -455,7 +485,7 @@ CREATE TABLE `migrations` (
   `migration` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
   `batch` int(11) NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=12 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 -- ----------------------------
 -- Records of migrations
@@ -467,6 +497,133 @@ INSERT INTO `migrations` VALUES ('4', '2020_01_09_091140_create_user_addresses_t
 INSERT INTO `migrations` VALUES ('5', '2016_01_04_173148_create_admin_tables', '3');
 INSERT INTO `migrations` VALUES ('6', '2020_01_13_073959_create_products_table', '4');
 INSERT INTO `migrations` VALUES ('7', '2020_01_13_074005_create_product_skus_table', '4');
+INSERT INTO `migrations` VALUES ('8', '2020_01_14_124338_create_user_favorite_products_table', '5');
+INSERT INTO `migrations` VALUES ('9', '2020_01_14_140913_create_cart_items_table', '5');
+INSERT INTO `migrations` VALUES ('10', '2020_01_16_065156_create_orders_table', '6');
+INSERT INTO `migrations` VALUES ('11', '2020_01_16_065204_create_order_items_table', '6');
+
+-- ----------------------------
+-- Table structure for order_items
+-- ----------------------------
+DROP TABLE IF EXISTS `order_items`;
+CREATE TABLE `order_items` (
+  `id` bigint(20) unsigned NOT NULL AUTO_INCREMENT,
+  `order_id` bigint(20) unsigned NOT NULL,
+  `product_id` bigint(20) unsigned NOT NULL,
+  `product_sku_id` bigint(20) unsigned NOT NULL,
+  `amount` int(10) unsigned NOT NULL,
+  `price` decimal(10,2) NOT NULL,
+  `rating` int(10) unsigned DEFAULT NULL,
+  `review` text COLLATE utf8mb4_unicode_ci,
+  `reviewed_at` timestamp NULL DEFAULT NULL,
+  PRIMARY KEY (`id`),
+  KEY `order_items_order_id_foreign` (`order_id`),
+  KEY `order_items_product_id_foreign` (`product_id`),
+  KEY `order_items_product_sku_id_foreign` (`product_sku_id`),
+  CONSTRAINT `order_items_order_id_foreign` FOREIGN KEY (`order_id`) REFERENCES `orders` (`id`) ON DELETE CASCADE,
+  CONSTRAINT `order_items_product_id_foreign` FOREIGN KEY (`product_id`) REFERENCES `products` (`id`) ON DELETE CASCADE,
+  CONSTRAINT `order_items_product_sku_id_foreign` FOREIGN KEY (`product_sku_id`) REFERENCES `product_skus` (`id`) ON DELETE CASCADE
+) ENGINE=InnoDB AUTO_INCREMENT=47 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+-- ----------------------------
+-- Records of order_items
+-- ----------------------------
+INSERT INTO `order_items` VALUES ('1', '1', '7', '18', '1', '2158.00', null, null, null);
+INSERT INTO `order_items` VALUES ('2', '1', '15', '41', '1', '6745.00', null, null, null);
+INSERT INTO `order_items` VALUES ('3', '1', '6', '15', '2', '6081.00', null, null, null);
+INSERT INTO `order_items` VALUES ('4', '2', '7', '18', '1', '2158.00', null, null, null);
+INSERT INTO `order_items` VALUES ('5', '2', '15', '41', '1', '6745.00', null, null, null);
+INSERT INTO `order_items` VALUES ('6', '2', '6', '15', '3', '6081.00', null, null, null);
+INSERT INTO `order_items` VALUES ('7', '3', '7', '18', '1', '2158.00', null, null, null);
+INSERT INTO `order_items` VALUES ('8', '3', '15', '41', '1', '6745.00', null, null, null);
+INSERT INTO `order_items` VALUES ('9', '3', '6', '15', '3', '6081.00', null, null, null);
+INSERT INTO `order_items` VALUES ('10', '4', '7', '18', '1', '2158.00', null, null, null);
+INSERT INTO `order_items` VALUES ('11', '4', '15', '41', '1', '6745.00', null, null, null);
+INSERT INTO `order_items` VALUES ('12', '4', '6', '15', '3', '6081.00', null, null, null);
+INSERT INTO `order_items` VALUES ('13', '5', '7', '18', '1', '2158.00', null, null, null);
+INSERT INTO `order_items` VALUES ('14', '5', '15', '41', '1', '6745.00', null, null, null);
+INSERT INTO `order_items` VALUES ('15', '5', '6', '15', '3', '6081.00', null, null, null);
+INSERT INTO `order_items` VALUES ('16', '5', '6', '14', '1', '6762.00', null, null, null);
+INSERT INTO `order_items` VALUES ('17', '6', '6', '15', '4', '6081.00', null, null, null);
+INSERT INTO `order_items` VALUES ('18', '7', '6', '15', '4', '6081.00', null, null, null);
+INSERT INTO `order_items` VALUES ('19', '7', '8', '20', '1', '9712.00', null, null, null);
+INSERT INTO `order_items` VALUES ('20', '8', '6', '15', '4', '6081.00', null, null, null);
+INSERT INTO `order_items` VALUES ('21', '8', '8', '20', '1', '9712.00', null, null, null);
+INSERT INTO `order_items` VALUES ('22', '8', '15', '42', '1', '9409.00', null, null, null);
+INSERT INTO `order_items` VALUES ('23', '9', '6', '15', '4', '6081.00', null, null, null);
+INSERT INTO `order_items` VALUES ('24', '9', '8', '20', '1', '9712.00', null, null, null);
+INSERT INTO `order_items` VALUES ('25', '9', '15', '42', '1', '9409.00', null, null, null);
+INSERT INTO `order_items` VALUES ('26', '10', '6', '15', '4', '6081.00', null, null, null);
+INSERT INTO `order_items` VALUES ('27', '10', '8', '20', '1', '9712.00', null, null, null);
+INSERT INTO `order_items` VALUES ('28', '10', '15', '42', '1', '9409.00', null, null, null);
+INSERT INTO `order_items` VALUES ('29', '11', '6', '15', '4', '6081.00', null, null, null);
+INSERT INTO `order_items` VALUES ('30', '11', '8', '20', '1', '9712.00', null, null, null);
+INSERT INTO `order_items` VALUES ('31', '11', '15', '42', '1', '9409.00', null, null, null);
+INSERT INTO `order_items` VALUES ('32', '12', '6', '15', '4', '6081.00', null, null, null);
+INSERT INTO `order_items` VALUES ('33', '12', '8', '20', '1', '9712.00', null, null, null);
+INSERT INTO `order_items` VALUES ('34', '12', '15', '42', '1', '9409.00', null, null, null);
+INSERT INTO `order_items` VALUES ('35', '13', '6', '15', '4', '6081.00', null, null, null);
+INSERT INTO `order_items` VALUES ('36', '13', '8', '20', '1', '9712.00', null, null, null);
+INSERT INTO `order_items` VALUES ('37', '13', '15', '42', '1', '9409.00', null, null, null);
+INSERT INTO `order_items` VALUES ('38', '14', '6', '15', '4', '6081.00', null, null, null);
+INSERT INTO `order_items` VALUES ('39', '14', '8', '20', '1', '9712.00', null, null, null);
+INSERT INTO `order_items` VALUES ('40', '14', '15', '42', '1', '9409.00', null, null, null);
+INSERT INTO `order_items` VALUES ('41', '15', '6', '15', '4', '6081.00', null, null, null);
+INSERT INTO `order_items` VALUES ('42', '15', '8', '20', '1', '9712.00', null, null, null);
+INSERT INTO `order_items` VALUES ('43', '15', '15', '42', '1', '9409.00', null, null, null);
+INSERT INTO `order_items` VALUES ('44', '16', '6', '15', '4', '6081.00', null, null, null);
+INSERT INTO `order_items` VALUES ('45', '16', '8', '20', '1', '9712.00', null, null, null);
+INSERT INTO `order_items` VALUES ('46', '16', '15', '42', '1', '9409.00', null, null, null);
+
+-- ----------------------------
+-- Table structure for orders
+-- ----------------------------
+DROP TABLE IF EXISTS `orders`;
+CREATE TABLE `orders` (
+  `id` bigint(20) unsigned NOT NULL AUTO_INCREMENT,
+  `no` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `user_id` bigint(20) unsigned NOT NULL,
+  `address` text COLLATE utf8mb4_unicode_ci NOT NULL,
+  `total_amount` decimal(10,2) NOT NULL,
+  `remark` text COLLATE utf8mb4_unicode_ci,
+  `paid_at` datetime DEFAULT NULL,
+  `payment_method` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `payment_no` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `refund_status` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT 'pending',
+  `refund_no` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `closed` tinyint(1) NOT NULL DEFAULT '0',
+  `reviewed` tinyint(1) NOT NULL DEFAULT '0',
+  `ship_status` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT 'pending',
+  `ship_data` text COLLATE utf8mb4_unicode_ci,
+  `extra` text COLLATE utf8mb4_unicode_ci,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL,
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `orders_no_unique` (`no`),
+  UNIQUE KEY `orders_refund_no_unique` (`refund_no`),
+  KEY `orders_user_id_foreign` (`user_id`),
+  CONSTRAINT `orders_user_id_foreign` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`) ON DELETE CASCADE
+) ENGINE=InnoDB AUTO_INCREMENT=17 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+-- ----------------------------
+-- Records of orders
+-- ----------------------------
+INSERT INTO `orders` VALUES ('1', '20200117060122965211', '1', '{\"address\":\"\\u6c5f\\u82cf\\u7701\\u5e38\\u5dde\\u5e02\\u6b66\\u8fdb\\u533a\\u7b2c65\\u8857\\u9053\\u7b2c919\\u53f7\",\"zip\":711401,\"contact_name\":\"\\u51cc\\u8fdf\",\"contact_phone\":\"13530832131\"}', '21065.00', '请尽快送到!!', null, null, null, 'pending', null, '0', '0', 'pending', null, null, '2020-01-17 06:01:22', '2020-01-17 06:01:22');
+INSERT INTO `orders` VALUES ('2', '20200117065441092475', '1', '{\"address\":\"\\u6c5f\\u82cf\\u7701\\u5e38\\u5dde\\u5e02\\u6b66\\u8fdb\\u533a\\u7b2c65\\u8857\\u9053\\u7b2c919\\u53f7\",\"zip\":711401,\"contact_name\":\"\\u51cc\\u8fdf\",\"contact_phone\":\"13530832131\"}', '27146.00', 'fdd', null, null, null, 'pending', null, '0', '0', 'pending', null, null, '2020-01-17 06:54:41', '2020-01-17 06:54:41');
+INSERT INTO `orders` VALUES ('3', '20200117065452562986', '1', '{\"address\":\"\\u6c5f\\u82cf\\u7701\\u5e38\\u5dde\\u5e02\\u6b66\\u8fdb\\u533a\\u7b2c65\\u8857\\u9053\\u7b2c919\\u53f7\",\"zip\":711401,\"contact_name\":\"\\u51cc\\u8fdf\",\"contact_phone\":\"13530832131\"}', '27146.00', 'fdd', null, null, null, 'pending', null, '0', '0', 'pending', null, null, '2020-01-17 06:54:52', '2020-01-17 06:54:52');
+INSERT INTO `orders` VALUES ('4', '20200117065705070059', '1', '{\"address\":\"\\u6c5f\\u82cf\\u7701\\u5e38\\u5dde\\u5e02\\u6b66\\u8fdb\\u533a\\u7b2c65\\u8857\\u9053\\u7b2c919\\u53f7\",\"zip\":711401,\"contact_name\":\"\\u51cc\\u8fdf\",\"contact_phone\":\"13530832131\"}', '27146.00', 'fdd', null, null, null, 'pending', null, '0', '0', 'pending', null, null, '2020-01-17 06:57:05', '2020-01-17 06:57:05');
+INSERT INTO `orders` VALUES ('5', '20200117065800053878', '1', '{\"address\":\"\\u6c5f\\u82cf\\u7701\\u5e38\\u5dde\\u5e02\\u6b66\\u8fdb\\u533a\\u7b2c65\\u8857\\u9053\\u7b2c919\\u53f7\",\"zip\":711401,\"contact_name\":\"\\u51cc\\u8fdf\",\"contact_phone\":\"13530832131\"}', '33908.00', null, null, null, null, 'pending', null, '0', '0', 'pending', null, null, '2020-01-17 06:58:00', '2020-01-17 06:58:00');
+INSERT INTO `orders` VALUES ('6', '20200117081145677387', '1', '{\"address\":\"\\u6c5f\\u82cf\\u7701\\u5e38\\u5dde\\u5e02\\u6b66\\u8fdb\\u533a\\u7b2c65\\u8857\\u9053\\u7b2c919\\u53f7\",\"zip\":711401,\"contact_name\":\"\\u51cc\\u8fdf\",\"contact_phone\":\"13530832131\"}', '24324.00', 'test', null, null, null, 'pending', null, '0', '0', 'pending', null, null, '2020-01-17 08:11:45', '2020-01-17 08:11:45');
+INSERT INTO `orders` VALUES ('7', '20200117082746709695', '1', '{\"address\":\"\\u6c5f\\u82cf\\u7701\\u5e38\\u5dde\\u5e02\\u6b66\\u8fdb\\u533a\\u7b2c65\\u8857\\u9053\\u7b2c919\\u53f7\",\"zip\":711401,\"contact_name\":\"\\u51cc\\u8fdf\",\"contact_phone\":\"13530832131\"}', '34036.00', null, null, null, null, 'pending', null, '0', '0', 'pending', null, null, '2020-01-17 08:27:46', '2020-01-17 08:27:46');
+INSERT INTO `orders` VALUES ('8', '20200117082911360165', '1', '{\"address\":\"\\u6c5f\\u82cf\\u7701\\u5e38\\u5dde\\u5e02\\u6b66\\u8fdb\\u533a\\u7b2c65\\u8857\\u9053\\u7b2c919\\u53f7\",\"zip\":711401,\"contact_name\":\"\\u51cc\\u8fdf\",\"contact_phone\":\"13530832131\"}', '43445.00', null, null, null, null, 'pending', null, '0', '0', 'pending', null, null, '2020-01-17 08:29:11', '2020-01-17 08:29:11');
+INSERT INTO `orders` VALUES ('9', '20200117082922708311', '1', '{\"address\":\"\\u6c5f\\u82cf\\u7701\\u5e38\\u5dde\\u5e02\\u6b66\\u8fdb\\u533a\\u7b2c65\\u8857\\u9053\\u7b2c919\\u53f7\",\"zip\":711401,\"contact_name\":\"\\u51cc\\u8fdf\",\"contact_phone\":\"13530832131\"}', '43445.00', null, null, null, null, 'pending', null, '0', '0', 'pending', null, null, '2020-01-17 08:29:22', '2020-01-17 08:29:22');
+INSERT INTO `orders` VALUES ('10', '20200117082935876867', '1', '{\"address\":\"\\u6c5f\\u82cf\\u7701\\u5e38\\u5dde\\u5e02\\u6b66\\u8fdb\\u533a\\u7b2c65\\u8857\\u9053\\u7b2c919\\u53f7\",\"zip\":711401,\"contact_name\":\"\\u51cc\\u8fdf\",\"contact_phone\":\"13530832131\"}', '43445.00', null, null, null, null, 'pending', null, '0', '0', 'pending', null, null, '2020-01-17 08:29:35', '2020-01-17 08:29:35');
+INSERT INTO `orders` VALUES ('11', '20200117082942450613', '1', '{\"address\":\"\\u6c5f\\u82cf\\u7701\\u5e38\\u5dde\\u5e02\\u6b66\\u8fdb\\u533a\\u7b2c65\\u8857\\u9053\\u7b2c919\\u53f7\",\"zip\":711401,\"contact_name\":\"\\u51cc\\u8fdf\",\"contact_phone\":\"13530832131\"}', '43445.00', null, null, null, null, 'pending', null, '0', '0', 'pending', null, null, '2020-01-17 08:29:42', '2020-01-17 08:29:42');
+INSERT INTO `orders` VALUES ('12', '20200117082959855225', '1', '{\"address\":\"\\u6c5f\\u82cf\\u7701\\u5e38\\u5dde\\u5e02\\u6b66\\u8fdb\\u533a\\u7b2c65\\u8857\\u9053\\u7b2c919\\u53f7\",\"zip\":711401,\"contact_name\":\"\\u51cc\\u8fdf\",\"contact_phone\":\"13530832131\"}', '43445.00', null, null, null, null, 'pending', null, '0', '0', 'pending', null, null, '2020-01-17 08:29:59', '2020-01-17 08:29:59');
+INSERT INTO `orders` VALUES ('13', '20200117083018127268', '1', '{\"address\":\"\\u6c5f\\u82cf\\u7701\\u5e38\\u5dde\\u5e02\\u6b66\\u8fdb\\u533a\\u7b2c65\\u8857\\u9053\\u7b2c919\\u53f7\",\"zip\":711401,\"contact_name\":\"\\u51cc\\u8fdf\",\"contact_phone\":\"13530832131\"}', '43445.00', null, null, null, null, 'pending', null, '0', '0', 'pending', null, null, '2020-01-17 08:30:18', '2020-01-17 08:30:18');
+INSERT INTO `orders` VALUES ('14', '20200117083022398042', '1', '{\"address\":\"\\u6c5f\\u82cf\\u7701\\u5e38\\u5dde\\u5e02\\u6b66\\u8fdb\\u533a\\u7b2c65\\u8857\\u9053\\u7b2c919\\u53f7\",\"zip\":711401,\"contact_name\":\"\\u51cc\\u8fdf\",\"contact_phone\":\"13530832131\"}', '43445.00', null, null, null, null, 'pending', null, '0', '0', 'pending', null, null, '2020-01-17 08:30:22', '2020-01-17 08:30:22');
+INSERT INTO `orders` VALUES ('15', '20200117083039786374', '1', '{\"address\":\"\\u6c5f\\u82cf\\u7701\\u5e38\\u5dde\\u5e02\\u6b66\\u8fdb\\u533a\\u7b2c65\\u8857\\u9053\\u7b2c919\\u53f7\",\"zip\":711401,\"contact_name\":\"\\u51cc\\u8fdf\",\"contact_phone\":\"13530832131\"}', '43445.00', null, null, null, null, 'pending', null, '0', '0', 'pending', null, null, '2020-01-17 08:30:39', '2020-01-17 08:30:39');
+INSERT INTO `orders` VALUES ('16', '20200117083046559808', '1', '{\"address\":\"\\u6c5f\\u82cf\\u7701\\u5e38\\u5dde\\u5e02\\u6b66\\u8fdb\\u533a\\u7b2c65\\u8857\\u9053\\u7b2c919\\u53f7\",\"zip\":711401,\"contact_name\":\"\\u51cc\\u8fdf\",\"contact_phone\":\"13530832131\"}', '43445.00', null, null, null, null, 'pending', null, '0', '0', 'pending', null, null, '2020-01-17 08:30:46', '2020-01-17 08:30:46');
 
 -- ----------------------------
 -- Table structure for password_resets
@@ -517,13 +674,13 @@ INSERT INTO `product_skus` VALUES ('10', 'distinctio', 'Hic voluptas qui est et 
 INSERT INTO `product_skus` VALUES ('11', 'labore', 'Occaecati vel omnis adipisci sed repellendus laudantium assumenda.', '3199.00', '58736', '5', '2020-01-14 07:00:03', '2020-01-14 07:00:03');
 INSERT INTO `product_skus` VALUES ('12', 'quis', 'Aspernatur sit odit sequi natus id voluptatem accusantium.', '2744.00', '96554', '5', '2020-01-14 07:00:03', '2020-01-14 07:00:03');
 INSERT INTO `product_skus` VALUES ('13', 'ipsam', 'Tenetur ea alias omnis dolores et quaerat omnis.', '4595.00', '35009', '5', '2020-01-14 07:00:03', '2020-01-14 07:00:03');
-INSERT INTO `product_skus` VALUES ('14', 'unde', 'A dolorum harum repellendus pariatur iusto est.', '6762.00', '99971', '6', '2020-01-14 07:00:03', '2020-01-14 07:00:03');
-INSERT INTO `product_skus` VALUES ('15', 'enim', 'Voluptatem assumenda deserunt est aut vel beatae.', '6081.00', '83021', '6', '2020-01-14 07:00:03', '2020-01-14 07:00:03');
+INSERT INTO `product_skus` VALUES ('14', 'unde', 'A dolorum harum repellendus pariatur iusto est.', '6762.00', '99971', '6', '2020-01-14 07:00:03', '2020-01-17 06:58:31');
+INSERT INTO `product_skus` VALUES ('15', 'enim', 'Voluptatem assumenda deserunt est aut vel beatae.', '6081.00', '82969', '6', '2020-01-14 07:00:03', '2020-01-17 08:30:46');
 INSERT INTO `product_skus` VALUES ('16', 'quia', 'Quia aperiam voluptas quis nisi exercitationem excepturi.', '103.00', '15284', '6', '2020-01-14 07:00:03', '2020-01-14 07:00:03');
 INSERT INTO `product_skus` VALUES ('17', 'ipsam', 'Aut illum nihil iste molestiae nihil qui eveniet.', '6400.00', '32376', '7', '2020-01-14 07:00:03', '2020-01-14 07:00:03');
-INSERT INTO `product_skus` VALUES ('18', 'facere', 'Similique praesentium ipsum et non excepturi est ipsa.', '2158.00', '22431', '7', '2020-01-14 07:00:03', '2020-01-14 07:00:03');
+INSERT INTO `product_skus` VALUES ('18', 'facere', 'Similique praesentium ipsum et non excepturi est ipsa.', '2158.00', '22428', '7', '2020-01-14 07:00:03', '2020-01-17 06:58:31');
 INSERT INTO `product_skus` VALUES ('19', 'maiores', 'Magnam dolorem adipisci omnis.', '6647.00', '87672', '7', '2020-01-14 07:00:03', '2020-01-14 07:00:03');
-INSERT INTO `product_skus` VALUES ('20', 'esse', 'Beatae dignissimos impedit rerum consequatur.', '9712.00', '28712', '8', '2020-01-14 07:00:03', '2020-01-14 07:00:03');
+INSERT INTO `product_skus` VALUES ('20', 'esse', 'Beatae dignissimos impedit rerum consequatur.', '9712.00', '28702', '8', '2020-01-14 07:00:03', '2020-01-17 08:30:46');
 INSERT INTO `product_skus` VALUES ('21', 'optio', 'Quidem dignissimos autem sunt et.', '9652.00', '26641', '8', '2020-01-14 07:00:03', '2020-01-14 07:00:03');
 INSERT INTO `product_skus` VALUES ('22', 'qui', 'Velit quas eos vel enim.', '7003.00', '94724', '8', '2020-01-14 07:00:03', '2020-01-14 07:00:03');
 INSERT INTO `product_skus` VALUES ('23', 'omnis', 'Et minima vitae id.', '7451.00', '7201', '9', '2020-01-14 07:00:03', '2020-01-14 07:00:03');
@@ -544,8 +701,8 @@ INSERT INTO `product_skus` VALUES ('37', 'ipsa', 'Nemo deserunt accusamus qui ma
 INSERT INTO `product_skus` VALUES ('38', 'et', 'Quo et rerum quaerat quidem.', '9679.00', '91717', '14', '2020-01-14 07:00:04', '2020-01-14 07:00:04');
 INSERT INTO `product_skus` VALUES ('39', 'voluptatum', 'Velit maiores totam repellat consequatur ut.', '2378.00', '92652', '14', '2020-01-14 07:00:04', '2020-01-14 07:00:04');
 INSERT INTO `product_skus` VALUES ('40', 'sit', 'Quasi impedit saepe est delectus necessitatibus esse laudantium.', '822.00', '41314', '14', '2020-01-14 07:00:04', '2020-01-14 07:00:04');
-INSERT INTO `product_skus` VALUES ('41', 'eos', 'Labore alias eligendi ipsa distinctio.', '6745.00', '20462', '15', '2020-01-14 07:00:04', '2020-01-14 07:00:04');
-INSERT INTO `product_skus` VALUES ('42', 'temporibus', 'Non dolor ducimus maiores qui quasi labore et.', '9409.00', '20015', '15', '2020-01-14 07:00:04', '2020-01-14 07:00:04');
+INSERT INTO `product_skus` VALUES ('41', 'eos', 'Labore alias eligendi ipsa distinctio.', '6745.00', '20459', '15', '2020-01-14 07:00:04', '2020-01-17 06:58:31');
+INSERT INTO `product_skus` VALUES ('42', 'temporibus', 'Non dolor ducimus maiores qui quasi labore et.', '9409.00', '20006', '15', '2020-01-14 07:00:04', '2020-01-17 08:30:46');
 INSERT INTO `product_skus` VALUES ('43', 'temporibus', 'Accusamus consequatur magnam provident quia.', '2100.00', '51302', '15', '2020-01-14 07:00:04', '2020-01-14 07:00:04');
 INSERT INTO `product_skus` VALUES ('44', 'commodi', 'Laudantium et nihil molestiae qui qui minus.', '5378.00', '14215', '16', '2020-01-14 07:00:04', '2020-01-14 07:00:04');
 INSERT INTO `product_skus` VALUES ('45', 'aliquid', 'Qui explicabo voluptatibus unde fugiat.', '1812.00', '78841', '16', '2020-01-14 07:00:04', '2020-01-14 07:00:04');
@@ -623,9 +780,9 @@ CREATE TABLE `products` (
 -- ----------------------------
 INSERT INTO `products` VALUES ('1', '小米 K20', '<p>小米k20 全网首发就此一家</p>', 'images/pms_1575881724.54265668.jpg', '0', '5.00', '0', '0', '1998.00', '2020-01-14 03:58:54', '2020-01-14 07:02:31');
 INSERT INTO `products` VALUES ('2', '小米洗衣机1代', '<p>全屋首付,送完即止</p>', 'images/pms_1552868299.27348967.jpg', '0', '5.00', '0', '0', '998.00', '2020-01-14 06:46:13', '2020-01-14 07:02:40');
-INSERT INTO `products` VALUES ('3', 'sint', 'Vitae facilis nesciunt accusamus saepe exercitationem.', 'https://cdn.learnku.com/uploads/images/201806/01/5320/C0bVuKB2nt.jpg', '1', '2.00', '0', '0', '3965.00', '2020-01-14 06:59:57', '2020-01-14 07:00:03');
+INSERT INTO `products` VALUES ('3', 'sint', '<p>Vitae facilis nesciunt accusamus saepe exercitationem.</p>', 'https://cdn.learnku.com/uploads/images/201806/01/5320/C0bVuKB2nt.jpg', '0', '2.00', '0', '0', '3965.00', '2020-01-14 06:59:57', '2020-01-16 03:05:45');
 INSERT INTO `products` VALUES ('4', 'aliquam', 'Ullam quam ut debitis quia animi vitae.', 'https://cdn.learnku.com/uploads/images/201806/01/5320/1B3n0ATKrn.jpg', '1', '3.00', '0', '0', '5244.00', '2020-01-14 07:00:02', '2020-01-14 07:00:03');
-INSERT INTO `products` VALUES ('5', 'rerum', 'Quidem eveniet error impedit quod voluptatem.', 'https://cdn.learnku.com/uploads/images/201806/01/5320/1B3n0ATKrn.jpg', '1', '3.00', '0', '0', '2744.00', '2020-01-14 07:00:02', '2020-01-14 07:00:03');
+INSERT INTO `products` VALUES ('5', 'rerum', '<p>Quidem eveniet error impedit quod voluptatem.</p>', 'https://cdn.learnku.com/uploads/images/201806/01/5320/1B3n0ATKrn.jpg', '0', '3.00', '0', '0', '2744.00', '2020-01-14 07:00:02', '2020-01-16 02:42:48');
 INSERT INTO `products` VALUES ('6', 'laudantium', 'Corporis voluptas consequatur corrupti sed quos porro.', 'https://cdn.learnku.com/uploads/images/201806/01/5320/nIvBAQO5Pj.jpg', '1', '4.00', '0', '0', '103.00', '2020-01-14 07:00:02', '2020-01-14 07:00:03');
 INSERT INTO `products` VALUES ('7', 'in', 'Et quam eos atque non velit tempore.', 'https://cdn.learnku.com/uploads/images/201806/01/5320/pa7DrV43Mw.jpg', '1', '3.00', '0', '0', '2158.00', '2020-01-14 07:00:03', '2020-01-14 07:00:03');
 INSERT INTO `products` VALUES ('8', 'similique', 'Hic quam deserunt dolor consectetur aliquid ratione.', 'https://cdn.learnku.com/uploads/images/201806/01/5320/r3BNRe4zXG.jpg', '1', '5.00', '0', '0', '7003.00', '2020-01-14 07:00:03', '2020-01-14 07:00:03');
@@ -679,9 +836,31 @@ CREATE TABLE `user_addresses` (
 -- ----------------------------
 -- Records of user_addresses
 -- ----------------------------
-INSERT INTO `user_addresses` VALUES ('1', '1', '江苏省', '常州市', '武进区', '第65街道第919号', '711401', '凌迟', '13530832131', null, '2020-01-09 10:08:41', '2020-01-10 03:51:11');
-INSERT INTO `user_addresses` VALUES ('2', '1', '广东省', '深圳市', '福田区', '第93街道第933号', '643900', '虞志强', '15008683477', null, '2020-01-09 10:08:41', '2020-01-09 10:08:41');
-INSERT INTO `user_addresses` VALUES ('3', '1', '江苏省', '苏州市', '相城区', '第15街道第309号', '772800', '毕伦', '18359785670', null, '2020-01-09 10:08:41', '2020-01-09 10:08:41');
+INSERT INTO `user_addresses` VALUES ('1', '1', '江苏省', '常州市', '武进区', '第65街道第919号', '711401', '凌迟', '13530832131', '2020-01-17 08:30:46', '2020-01-09 10:08:41', '2020-01-17 08:30:46');
+INSERT INTO `user_addresses` VALUES ('2', '1', '广东省', '深圳市', '福田区', '第93街道第933号', '643900', '虞志强', '13530832131', null, '2020-01-09 10:08:41', '2020-01-16 08:33:21');
+INSERT INTO `user_addresses` VALUES ('3', '1', '江苏省', '苏州市', '相城区', '第15街道第309号', '772800', '毕伦', '13530832131', null, '2020-01-09 10:08:41', '2020-01-16 08:33:25');
+
+-- ----------------------------
+-- Table structure for user_favorite_products
+-- ----------------------------
+DROP TABLE IF EXISTS `user_favorite_products`;
+CREATE TABLE `user_favorite_products` (
+  `id` bigint(20) unsigned NOT NULL AUTO_INCREMENT,
+  `user_id` bigint(20) unsigned NOT NULL,
+  `product_id` bigint(20) unsigned NOT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL,
+  PRIMARY KEY (`id`),
+  KEY `user_favorite_products_user_id_foreign` (`user_id`),
+  KEY `user_favorite_products_product_id_foreign` (`product_id`),
+  CONSTRAINT `user_favorite_products_product_id_foreign` FOREIGN KEY (`product_id`) REFERENCES `products` (`id`) ON DELETE CASCADE,
+  CONSTRAINT `user_favorite_products_user_id_foreign` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`) ON DELETE CASCADE
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+-- ----------------------------
+-- Records of user_favorite_products
+-- ----------------------------
+INSERT INTO `user_favorite_products` VALUES ('1', '1', '5', '2020-01-16 01:57:26', '2020-01-16 01:57:26');
 
 -- ----------------------------
 -- Table structure for users
