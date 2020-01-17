@@ -160,7 +160,7 @@
                         _.each(error.response.data.errors, function(errors) {
                             _.each(errors, function (error) {
                                 html += error + '<br>';
-                            })
+                            });
                         });
                         html += '</div>';
                         swal({content: $(html)[0], icon: 'error'})
