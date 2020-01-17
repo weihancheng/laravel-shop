@@ -147,9 +147,11 @@
                         amount: $input.val()
                     })
                 });
-                axios.post('{{ route('orders.store') }}', req).then(function (responce) {
+                axios.post('{{ route('orders.store') }}', req).then(function (response) {
                     // 成功返回
-                    swal('订单提交成功', '', 'success');
+                    swal('订单提交成功', '', 'success').then(() => {
+                        localhost.href = '/orders/' + response.data.data.di
+                    });
                 }, function (error) {
                     // 失败返回
                     if (error.response.status === 422) {
