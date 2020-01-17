@@ -41,6 +41,8 @@ Route::group(['middleware' => ['auth', 'verified']], function() {
 	Route::get('cart', 'CartController@index')->name('cart.index');
 	// 移除购物车
 	Route::delete('cart/{sku}', 'CartController@remove')->name('cart.remove');
+	// 创建订单
+	Route::post('orders', 'OrdersController@store')->name('orders.store');
 });
 
 // 这里和其他路由产生冲突

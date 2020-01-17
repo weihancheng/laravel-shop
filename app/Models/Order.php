@@ -42,6 +42,22 @@ class Order extends Model
 		'paid_at'
 	];
 
+	protected $fillable = [
+		'no',
+		'address',
+		'total_amount',
+		'remark',
+		'paid_at',
+		'payment_method',
+		'payment_no',
+		'refund_status',
+		'refund_no',
+		'reviewed',
+		'ship_status',
+		'ship_data',
+		'extra'
+	];
+
 	protected static function boot()
 	{
 		parent::boot();
