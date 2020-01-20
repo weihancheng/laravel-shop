@@ -2,17 +2,11 @@
 
 namespace App\Http\Controllers;
 
-use App\Exceptions\InvalidRequestException;
 use App\Http\Requests\OrderRequest;
-use App\Services\CartService;
 use App\Services\OrderService;
 use Illuminate\Http\Request;
-use App\Jobs\CloseOrder;
 use App\Models\Order;
-use App\Models\ProductSku;
 use App\Models\UserAddress;
-use Carbon\Carbon;
-use Illuminate\Support\Facades\DB;
 
 class OrdersController extends Controller
 {

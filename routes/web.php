@@ -47,6 +47,14 @@ Route::group(['middleware' => ['auth', 'verified']], function() {
 	Route::get('orders', 'OrdersController@index')->name('orders.index');
 	// 订单页
 	Route::get('orders/{order}', 'OrdersController@show')->name('orders.show');
+	// 支付界面
+    Route::get('alipay', function() {
+        return app('alipay')->web([
+            'out_trade_no' => time(),
+            'total_amount' => '1',
+            'subject' => 'test subject - 测试',
+        ]);
+    });
 });
 
 // 这里和其他路由产生冲突
