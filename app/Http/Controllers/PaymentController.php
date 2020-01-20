@@ -5,10 +5,12 @@ namespace App\Http\Controllers;
 use App\Exceptions\InvalidRequestException;
 use App\Models\Order;
 use Carbon\Carbon;
+use Endroid\QrCode\QrCode;
 use Illuminate\Http\Request;
 
 class PaymentController extends Controller
 {
+    // 调用支付宝支付
     public function payByAlipay(Order $order, Request $request)
     {
         // 判断是否是当前用户
@@ -36,6 +38,7 @@ class PaymentController extends Controller
         return view('pages.success', ['msg' => '付款成功']);
     }
 
+    // 支付宝服务器回调
     public function alipayNotify()
     {
         // 校验输入参数
@@ -58,4 +61,48 @@ class PaymentController extends Controller
         ]);
         return app('alipay')->success();
     }
+
+    // 调用微信支付
+    public function payByWechat(Order $order, Request $request)
+    {
+        // 校验权限
+        $this->authorize('own', $order);
+        // 订单状态已支付或已关闭
+        if ($order->paid_at || $order->closed) throw new InvalidRequestException('订单状态不正确');
+
+        // 微信返回的json
+        $wechatOrder = app('wechat_pay')->scan([
+            'out_trade_no' => $order->no,
+            'total_fee' => $order->total_amount * 100, // 与支付宝不同, 微信支付金额单位为分
+            'body' => '支付 Laravel Shop 的订单：'.$order->no, // 订单描述
+        ]);
+
+        // 把要转化的字符串作为qrcode的构造函数
+        $qrcode = new QrCode($wechatOrder->code_url);
+
+        // 将生成的二维码图片数据以字符串的形式输出, 并带上相应的响应类型
+        return response($qrcode->writeString(), 200, ['Content-type' => $qrcode->getContentType()]);
+
+    }
+
+    // 微信支付服务端回调
+    public function wechatNotify()
+    {
+        // 校验参数
+        $data = app('wechat_pay')->verify();
+        $order = Order::query()->where('no', $data->out_trade_no)->first();
+        // 订单不存在则告知微信支付
+        if (!$order) return 'fail';
+        // 订单支付成功
+        if ($order->paid_at) return app('wechat_pay')->success();
+
+        // 订单标记为已支付
+        $order->update([
+            'paid_at' => Carbon::now(),
+            'payment_method' => 'wechat',
+            'payment_no' => $data->transaction_id
+        ]);
+        return app('wechat_pay')->success();
+    }
+
 }
