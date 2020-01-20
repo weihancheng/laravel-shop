@@ -39,36 +39,44 @@
                         </tr>
                         @endforeach
                         <tr><td colspan="4"></td></tr>
-                        <div class="order-bottom">
-                            <div class="order-info">
-                                <div class="line"><div class="line-label">收货地址：</div><div class="line-value">{{ join(' ', $order->address) }}</div></div>
-                                <div class="line"><div class="line-label">订单备注：</div><div class="line-value">{{ $order->remark ?: '-' }}</div></div>
-                                <div class="line"><div class="line-label">订单编号：</div><div class="line-value">{{ $order->no }}</div></div>
-                            </div>
-                            <div class="order-summary text-right">
-                                <div class="total-amount">
-                                    <span>订单总价：</span>
-                                    <div class="value">￥{{ $order->total_amount }}</div>
-                                </div>
-                                <div>
-                                    <span>订单状态：</span>
-                                    <div class="value">
-                                        @if($order->paid_at)
-                                            @if($order->refund_status === \App\Models\Order::REFUND_STATUS_PENDING)
-                                                已支付
-                                            @else
-                                                {{ \App\Models\Order::$refundStatusMap[$order->refund_status] }}
-                                            @endif
-                                        @elseif($order->closed)
-                                            已关闭
-                                        @else
-                                            未支付
-                                        @endif
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
                     </table>
+                    <div class="order-bottom">
+                        <div class="order-info">
+                            <div class="line"><div class="line-label">收货地址：</div><div class="line-value">{{ join(' ', $order->address) }}</div></div>
+                            <div class="line"><div class="line-label">订单备注：</div><div class="line-value">{{ $order->remark ?: '-' }}</div></div>
+                            <div class="line"><div class="line-label">订单编号：</div><div class="line-value">{{ $order->no }}</div></div>
+                        </div>
+                        <div class="order-summary text-right">
+                            <div class="total-amount">
+                                <span>订单总价：</span>
+                                <div class="value">￥{{ $order->total_amount }}</div>
+                            </div>
+                            <div>
+                                <span>订单状态：</span>
+                                <div class="value">
+                                    @if($order->paid_at)
+                                        @if($order->refund_status === \App\Models\Order::REFUND_STATUS_PENDING)
+                                            已支付
+                                        @else
+                                            {{ \App\Models\Order::$refundStatusMap[$order->refund_status] }}
+                                        @endif
+                                    @elseif($order->closed)
+                                        已关闭
+                                    @else
+                                        未支付
+                                    @endif
+                                </div>
+                            </div>
+                            {{-- 支付按钮start --}}
+                            @if(!$order->paid_at && !$order->closed)
+                                <div class="payment-buttons">
+                                    <a href="{{ route('payment.alipay', ['order' => $order->id]) }}" class="btn btn-primary btn-sm">支付宝支付</a>
+                                </div>
+                            @endif
+                            {{-- 支付按钮end --}}
+                        </div>
+                    </div>
+
                 </div>
             </div>
         </div>
