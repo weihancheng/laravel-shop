@@ -45,6 +45,17 @@
                             <div class="line"><div class="line-label">收货地址：</div><div class="line-value">{{ join(' ', $order->address) }}</div></div>
                             <div class="line"><div class="line-label">订单备注：</div><div class="line-value">{{ $order->remark ?: '-' }}</div></div>
                             <div class="line"><div class="line-label">订单编号：</div><div class="line-value">{{ $order->no }}</div></div>
+                            {{-- 输出物流状态start --}}
+                            <div class="line">
+                                <div class="line-label">物流状态：</div>
+                                <div class="line-value">{{ \App\Models\Order::$shipStatusMap[$order->ship_status] }}</div>
+                            </div>
+                            @if($order->ship_status)
+                                <div class="line">
+                                    <div class="line-label">物流信息：</div>
+                                    <div class="line-value">{{ $order->ship_data['express_company'] }} {{ $order->ship_data['express_no'] }}</div>
+                                </div>
+                            @endif
                         </div>
                         <div class="order-summary text-right">
                             <div class="total-amount">
@@ -75,6 +86,12 @@
                                 </div>
                             @endif
                             {{-- 支付按钮end --}}
+                            {{-- 如果订单的发货状态为已发货则展示去人收货按钮 --}}
+                            @if($order->ship_status === \App\Models\Order::SHIP_STATUS_DELIVERED)
+                                <div class="receive-button">
+                                    <button type="submit" id="btn-received" class="btn btn-sm btn-success">确认收货</button>
+                                </div>
+                            @endif
                         </div>
                     </div>
 
@@ -95,6 +112,24 @@
                    if (result) {
                        location.reload();
                    }
+                });
+            });
+
+            // 收货按钮
+            $('#btn-received').click(function () {
+                // 确认弹出框
+                swal({
+                    title: '确认已经收到商品?',
+                    icon: 'warning',
+                    dangerMode: true,
+                    buttons: ['取消', '确认收到']
+                }).then(function (ret) {
+                    if (!ret) {
+                        return;
+                    }
+                    axios.post('{{ route('orders.received', [$order->id]) }}').then(function () {
+                        location.reload();
+                    })
                 });
             });
         })
