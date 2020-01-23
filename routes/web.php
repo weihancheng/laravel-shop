@@ -55,6 +55,10 @@ Route::group(['middleware' => ['auth', 'verified']], function() {
     Route::get('payment/{order}/wechat', 'PaymentController@payByWechat')->name('payment.wechat');
     // 收货
     Route::post('orders/{order}/received', 'OrdersController@received')->name('orders.received');
+    // 评价页面
+    Route::get('orders/{order}/review', 'OrdersController@review')->name('orders.review.show');
+    // 评价
+    Route::post('orders/{order}/review', 'OrdersController@sendReview')->name('orders.review.store');
 });
 
 // 这里和其他路由产生冲突

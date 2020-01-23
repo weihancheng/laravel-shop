@@ -53,7 +53,7 @@
                             @if($order->ship_status)
                                 <div class="line">
                                     <div class="line-label">物流信息：</div>
-                                    <div class="line-value">{{ $order->ship_data['express_company'] }} {{ $order->ship_data['express_no'] }}</div>
+                                    <div class="line-value">{{ $order->ship_data['express_company'] ?? ''}} {{ $order->ship_data['express_no']  ?? ''}}</div>
                                 </div>
                             @endif
                         </div>

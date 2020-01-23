@@ -2,9 +2,12 @@
 
 namespace App\Http\Controllers;
 
+use App\Events\OrderReviewed;
 use App\Exceptions\InvalidRequestException;
 use App\Http\Requests\OrderRequest;
+use App\Http\Requests\SendReviewRequest;
 use App\Services\OrderService;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 use App\Models\Order;
 use App\Models\UserAddress;
@@ -57,6 +60,45 @@ class OrdersController extends Controller
         ]);
 
         // 返回原来页面
+        return redirect()->back();
+    }
+
+    // 评论界面
+    public function review(Order $order)
+    {
+        $this->authorize('own', $order);
+
+        if (!$order->paid_at) throw new InvalidRequestException('该订单未支付,不可评论');
+
+        return view('orders.review', ['order' => $order->load('items.productSku', 'items.product')]);
+    }
+
+    // 发送评论
+    public function sendReview(Order $order, SendReviewRequest $request)
+    {
+        $this->authorize('own', $order);
+        // 未支付不能评论
+        if (!$order->paid_at) throw new InvalidRequestException('该订单未支付,不可评论');
+        // 判断是否已经评论过了
+        if ($order->reviewed) throw new InvalidRequestException('该订单已经评论过来,不可重复评论');
+
+        $reviews = $request->input('reviews');
+        // 开启事务
+        \DB::transaction(function () use ($reviews, $order) {
+            // 遍历用户的评论数据
+            foreach ($reviews as $review) {
+                $orderItem = $order->items()->find($review['id']);
+                // 保存评分
+                $orderItem->update([
+                    'rating' => $review['rating'],
+                    'review' => $review['review'],
+                    'reviewed_at' => Carbon::now()
+                ]);
+            }
+            // 将评分标记改为已评论
+            $order->update(['reviewed' => true]);
+            event(new OrderReviewed($order));
+        });
         return redirect()->back();
     }
 }

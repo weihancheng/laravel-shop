@@ -39,11 +39,11 @@ class PaymentController extends Controller
         return view('pages.success', ['msg' => '付款成功']);
     }
 
-    // 支付宝服务器回调
+    // 支付宝服务器回调: 注意本地使用的是虚拟机,所以这里无法接受支付宝的回调信息, 需要使用其他方式接受回调从而除非下面的逻辑
     public function alipayNotify()
     {
         // 校验输入参数
-        $data = app('alipay')->verify();
+        $data = app('alipay')->verify();;
         // 如果订单不是成功或者结束,则不会走后续流程
         // 所有交易状态 https://docs.open.alipay.com/59/103672
         if (!in_array($data->trade_status, ['TRADE_SUCCESS', 'TRADE_CLOSED'])) return app('alipay')->success();
