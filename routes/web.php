@@ -59,6 +59,8 @@ Route::group(['middleware' => ['auth', 'verified']], function() {
     Route::get('orders/{order}/review', 'OrdersController@review')->name('orders.review.show');
     // 评价
     Route::post('orders/{order}/review', 'OrdersController@sendReview')->name('orders.review.store');
+    // 申请退款
+    Route::post('orders/{order}/apply_refund', 'OrdersController@applyRefund')->name('orders.apply_refund');
 });
 
 // 这里和其他路由产生冲突
