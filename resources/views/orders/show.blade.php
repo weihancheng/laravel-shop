@@ -19,48 +19,64 @@
                         </tr>
                         </thead>
                         @foreach($order->items as $index => $item)
-                        <tr>
-                            <td class="product-info">
-                                <div class="preview">
-                                    <a href="{{ route('products.show', [$item->product_id]) }}" target="_blank">
-                                        <img src="{{ $item->product->image_url }}">
-                                    </a>
-                                </div>
-                                <div>
+                            <tr>
+                                <td class="product-info">
+                                    <div class="preview">
+                                        <a href="{{ route('products.show', [$item->product_id]) }}" target="_blank">
+                                            <img src="{{ $item->product->image_url }}">
+                                        </a>
+                                    </div>
+                                    <div>
                                     <span class="product-title">
-                                       <a target="_blank" href="{{ route('products.show', [$item->product_id]) }}">{{ $item->product->title }}</a>
+                                       <a target="_blank"
+                                          href="{{ route('products.show', [$item->product_id]) }}">{{ $item->product->title }}</a>
                                     </span>
-                                    <span class="sku-title">{{ $item->productSku->title }}</span>
-                                </div>
-                            </td>
-                            <td class="sku-price text-center vertical-middle">￥{{ $item->price }}</td>
-                            <td class="sku-amount text-center vertical-middle">{{ $item->amount }}</td>
-                            <td class="item-amount text-right vertical-middle">￥{{ number_format($item->price * $item->amount, 2, '.', '') }}</td>
-                        </tr>
+                                        <span class="sku-title">{{ $item->productSku->title }}</span>
+                                    </div>
+                                </td>
+                                <td class="sku-price text-center vertical-middle">￥{{ $item->price }}</td>
+                                <td class="sku-amount text-center vertical-middle">{{ $item->amount }}</td>
+                                <td class="item-amount text-right vertical-middle">
+                                    ￥{{ number_format($item->price * $item->amount, 2, '.', '') }}</td>
+                            </tr>
                         @endforeach
-                        <tr><td colspan="4"></td></tr>
+                        <tr>
+                            <td colspan="4"></td>
+                        </tr>
                     </table>
                     <div class="order-bottom">
                         <div class="order-info">
-                            <div class="line"><div class="line-label">收货地址：</div><div class="line-value">{{ join(' ', $order->address) }}</div></div>
-                            <div class="line"><div class="line-label">订单备注：</div><div class="line-value">{{ $order->remark ?: '-' }}</div></div>
-                            <div class="line"><div class="line-label">订单编号：</div><div class="line-value">{{ $order->no }}</div></div>
+                            <div class="line">
+                                <div class="line-label">收货地址：</div>
+                                <div class="line-value">{{ join(' ', $order->address) }}</div>
+                            </div>
+                            <div class="line">
+                                <div class="line-label">订单备注：</div>
+                                <div class="line-value">{{ $order->remark ?: '-' }}</div>
+                            </div>
+                            <div class="line">
+                                <div class="line-label">订单编号：</div>
+                                <div class="line-value">{{ $order->no }}</div>
+                            </div>
                             {{-- 输出物流信息start --}}
                             <div class="line">
                                 <div class="line-label">物流状态：</div>
-                                <div class="line-value">{{ \App\Models\Order::$shipStatusMap[$order->ship_status] }}</div>
+                                <div
+                                    class="line-value">{{ \App\Models\Order::$shipStatusMap[$order->ship_status] }}</div>
                             </div>
                             @if($order->ship_status)
                                 <div class="line">
                                     <div class="line-label">物流信息：</div>
-                                    <div class="line-value">{{ $order->ship_data['express_company'] ?? ''}} {{ $order->ship_data['express_no']  ?? ''}}</div>
+                                    <div
+                                        class="line-value">{{ $order->ship_data['express_company'] ?? ''}} {{ $order->ship_data['express_no']  ?? ''}}</div>
                                 </div>
                             @endif
                             {{-- 输出物流信息end --}}
                             @if($order->paid_at && $order->refund_status !== \App\Models\Order::REFUND_STATUS_PENDING)
                                 <div class="line">
                                     <div class="line-label">退款状态：</div>
-                                    <div class="line-value">{{ \App\Models\Order::$refundStatusMap[$order->refund_status] }}</div>
+                                    <div
+                                        class="line-value">{{ \App\Models\Order::$refundStatusMap[$order->refund_status] }}</div>
                                 </div>
                                 <div class="line">
                                     <div class="line-label">退款理由：</div>
@@ -89,10 +105,17 @@
                                     @endif
                                 </div>
                             </div>
+                            @if(isset($order->extra['refund_disagree_reason']))
+                                <div>
+                                    <span>拒绝退款理由:</span>
+                                    <div class="value">{{ $order->extra['refund_disagree_reason'] }}</div>
+                                </div>
+                            @endif
                             {{-- 支付按钮start --}}
                             @if(!$order->paid_at && !$order->closed)
                                 <div class="payment-buttons">
-                                    <a href="{{ route('payment.alipay', ['order' => $order->id]) }}" class="btn btn-primary btn-sm">支付宝支付</a>
+                                    <a href="{{ route('payment.alipay', ['order' => $order->id]) }}"
+                                       class="btn btn-primary btn-sm">支付宝支付</a>
                                     <a id="btn-wechat" class="btn btn-success btn-sm">微信支付</a>
                                 </div>
                             @endif
@@ -119,16 +142,16 @@
 @endsection
 @section('scriptsAfterJs')
     <script>
-        $(document).ready(function() {
+        $(document).ready(function () {
             // 微信支付按钮事件
             $('#btn-wechat').click(function () {
                 swal({
                     content: $('<img src="{{ route('payment.wechat', ['order' => $order->id]) }}">')[0],
                     buttons: ['关闭', '已完成付款']
                 }).then(function (result) {
-                   if (result) {
-                       location.reload();
-                   }
+                    if (result) {
+                        location.reload();
+                    }
                 });
             });
 
@@ -160,7 +183,7 @@
                         swal('退款理由不可为空', '', 'error');
                         return;
                     }
-                    axios.post('{{ route('orders.apply_refund', [$order->id]) }}', {reason: input}).then(function() {
+                    axios.post('{{ route('orders.apply_refund', [$order->id]) }}', {reason: input}).then(function () {
                         swal('申请退款成功', '', 'success').then(function () {
                             location.reload();
                         });
