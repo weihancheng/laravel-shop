@@ -122,6 +122,21 @@ class OrdersController extends AdminController
         // 判断支付方式
         switch ($order->payment_method) {
             case 'wechat':
+                $refundNo = Order::getAvailableRefundNo();
+                app('wechat_pay')->refund([
+                   'out_trade_no' => $order->no,
+                    'total_fee' => $order->total_amount * 100,
+                    'refund_fee' => $order->total_amount * 100,
+                    'out_refund_no' => $refundNo,  //退款订单号
+//                    'notify_url' => 'http://requestbin.fullcontact.com/******'  // 测试环境
+                    'notify_url' => route('payment.wechat.refund_notify')
+                ]);
+
+                // 将订单状态改成退款中
+                $order->update([
+                    'refund_no' => $refundNo,
+                    'refund_status' => Order::REFUND_STATUS_PROCESSING
+                ]);
                 break;
             case 'alipay':
                 $refundNo = Order::getAvailableRefundNo();

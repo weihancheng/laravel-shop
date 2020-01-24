@@ -166,7 +166,7 @@
                 showLoaderOnConfirm: true,
                 preConfirm: function () {
                     return $.ajax({
-                        url: '{{ route('admin.orders.handle_refund') }}',
+                        url: '{{ route('admin.orders.handle_refund', [$order->id]) }}',
                         type: 'POST',
                         data: JSON.stringify({
                             agree: true, // 代表同意退款
