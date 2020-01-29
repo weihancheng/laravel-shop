@@ -137,7 +137,8 @@
                 var req = {
                     address_id: $('#order-form').find('select[name=address]').val(),
                     items: [],
-                    remark: $('#order-form').find('textarea[name=remark]').val()
+                    remark: $('#order-form').find('textarea[name=remark]').val(),
+                    coupon_code: $('input[name=coupon_code]').val()
                 };
                 // 遍历table标签所有带data-id属性的tr标签,
                 $('table tr[data-id]').each(function () {
