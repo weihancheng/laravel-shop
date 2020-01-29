@@ -4,7 +4,6 @@ namespace App\Exceptions;
 
 use Exception;
 use Illuminate\Http\Request;
-use Throwable;
 
 class CouponCodeUnavailableException extends Exception
 {
@@ -16,7 +15,7 @@ class CouponCodeUnavailableException extends Exception
     public function render(Request $request)
     {
         // 如果用户通过api请求,就放回json格式
-        if ($request->exceptsJson()) {
+        if ($request->expectsJson()) {
             return response()->json(['msg' => $this->message], $this->code);
         }
 
