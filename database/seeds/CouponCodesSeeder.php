@@ -2,7 +2,7 @@
 
 use Illuminate\Database\Seeder;
 
-class UsersSeeder extends Seeder
+class CouponCodesSeeder extends Seeder
 {
     /**
      * Run the database seeds.
@@ -11,7 +11,6 @@ class UsersSeeder extends Seeder
      */
     public function run()
     {
-        // 通过工厂方法填充100条数据到数据库中
-        factory(\App\Models\User::class, 100)->create();
+        factory(\App\Models\CouponCode::class, 20)->create();
     }
 }

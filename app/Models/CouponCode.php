@@ -87,6 +87,7 @@ class CouponCode extends Model
         if (!is_null($orderAmount) && $orderAmount < $this->min_amount)
             throw new CouponCodeUnavailableException('订单金额不满足该优惠劵低金额');
 
+        // 判断使用了优惠劵的条件: 1.订单必须有coupon_code_id && (2.用户已经支付了 || 3.用户未退款成功)
         $used = Order::where('user_id', $user->id)->where('coupon_code_id', $this->id)->where(function ($query) {
             $query->whereNull('paid_at')->where('closed', false)->orWhere(function ($query) {
                 $query->whereNotNull('paid_at')->where('refund_status', '!=', Order::REFUND_STATUS_SUCCESS);
