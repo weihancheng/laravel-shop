@@ -21,6 +21,11 @@ class Product extends Model
 		return $this->hasMany(ProductSku::class);
 	}
 
+    public function category()
+    {
+        return $this->belongsTo(Category::class);
+	}
+
 	// 生成图片绝对路径
 	public function getImageUrlAttribute()
 	{
@@ -29,4 +34,5 @@ class Product extends Model
 		}
 		return \Storage::disk('public')->url($this->attributes['image']);
 	}
+
 }
