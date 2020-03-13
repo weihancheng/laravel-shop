@@ -2,6 +2,7 @@
 
 namespace App\Admin\Controllers;
 
+use App\Models\Category;
 use App\Models\Product;
 use Encore\Admin\Controllers\AdminController;
 use Encore\Admin\Form;
@@ -24,6 +25,7 @@ class ProductsController extends AdminController
     protected function grid()
     {
         $grid = new Grid(new Product);
+        $grid->model()->with(['category']);
 
         $grid->id('ID')->sorttable();  // 使用sortable()方法把当前列设置为可排序列
 		$grid->title('商品名称');
@@ -34,6 +36,7 @@ class ProductsController extends AdminController
 		$grid->rating('评分');
 		$grid->sold_count('销量');
 		$grid->review_count('评论数');
+		$grid->column('category.name', '类目');
 
 		$grid->actions(function ($actions) {
 			$actions->disableView();  // 去掉查看
@@ -60,6 +63,10 @@ class ProductsController extends AdminController
         $form = new Form(new Product);
 
         $form->text('title', '商品名称')->rules('required');
+        $form->select('category_id', '类目')->options(function ($id) {
+            $category = Category::query()->find($id);
+            if ($category) return [ $category->id => $category->full_name ];
+        })->ajax('/admin/api/categories?is_directory=0');
         $form->image('image', '封面图片')->rules('required|image'); //图片上传功能
         $form->quill('description', '商品描述')->rules('required');   // 富文本编辑器
 		$form->radio('on_sale', '上架')->options(['1' => '是', '0' => '否'])->default(0);
