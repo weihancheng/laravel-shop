@@ -1,6 +1,6 @@
 -- MySQL dump 10.13  Distrib 5.7.28, for Linux (x86_64)
 --
--- Host: localhost    Database: laravel-shop
+-- Host: 192.168.10.10    Database: laravel-shop
 -- ------------------------------------------------------
 -- Server version	5.7.28-0ubuntu0.18.04.4
 
@@ -21,7 +21,7 @@
 
 LOCK TABLES `admin_menu` WRITE;
 /*!40000 ALTER TABLE `admin_menu` DISABLE KEYS */;
-INSERT INTO `admin_menu` VALUES (1,0,1,'首页','fa-bar-chart','/',NULL,NULL,'2020-01-10 07:14:05'),(2,0,6,'系统管理','fa-tasks',NULL,NULL,NULL,'2020-01-24 10:22:48'),(3,2,7,'管理员','fa-users','auth/users',NULL,NULL,'2020-01-24 10:22:48'),(4,2,8,'角色','fa-user','auth/roles',NULL,NULL,'2020-01-24 10:22:48'),(5,2,9,'权限','fa-ban','auth/permissions',NULL,NULL,'2020-01-24 10:22:48'),(6,2,10,'菜单','fa-bars','auth/menu',NULL,NULL,'2020-01-24 10:22:48'),(7,2,11,'操作日志','fa-history','auth/logs',NULL,NULL,'2020-01-24 10:22:48'),(8,0,2,'用户管理','fa-users','/users',NULL,'2020-01-10 07:48:41','2020-01-10 07:49:38'),(9,0,3,'商品管理','fa-cubes','/products',NULL,'2020-01-13 08:25:38','2020-01-20 10:12:27'),(10,0,4,'订单管理','fa-rmb','/orders',NULL,'2020-01-20 10:11:22','2020-01-20 10:12:27'),(11,0,5,'优惠劵管理','fa-tags','/coupon_codes',NULL,'2020-01-24 10:22:43','2020-01-24 10:22:48');
+INSERT INTO `admin_menu` VALUES (1,0,1,'首页','fa-bar-chart','/',NULL,NULL,'2020-01-10 07:14:05'),(2,0,7,'系统管理','fa-tasks',NULL,NULL,NULL,'2020-03-13 13:10:09'),(3,2,8,'管理员','fa-users','auth/users',NULL,NULL,'2020-03-13 13:10:09'),(4,2,9,'角色','fa-user','auth/roles',NULL,NULL,'2020-03-13 13:10:09'),(5,2,10,'权限','fa-ban','auth/permissions',NULL,NULL,'2020-03-13 13:10:09'),(6,2,11,'菜单','fa-bars','auth/menu',NULL,NULL,'2020-03-13 13:10:09'),(7,2,12,'操作日志','fa-history','auth/logs',NULL,NULL,'2020-03-13 13:10:09'),(8,0,2,'用户管理','fa-users','/users',NULL,'2020-01-10 07:48:41','2020-01-10 07:49:38'),(9,0,3,'商品管理','fa-cubes','/products',NULL,'2020-01-13 08:25:38','2020-01-20 10:12:27'),(10,0,4,'订单管理','fa-rmb','/orders',NULL,'2020-01-20 10:11:22','2020-01-20 10:12:27'),(11,0,5,'优惠劵管理','fa-tags','/coupon_codes',NULL,'2020-01-24 10:22:43','2020-01-24 10:22:48'),(12,0,6,'类目管理','fa-bars','/categories',NULL,'2020-03-13 13:09:52','2020-03-13 13:10:09');
 /*!40000 ALTER TABLE `admin_menu` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -103,4 +103,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2020-03-11 15:48:03
+-- Dump completed on 2020-03-13 13:27:12
