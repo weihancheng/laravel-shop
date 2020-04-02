@@ -15,7 +15,7 @@ class ProductsController extends AdminController
      *
      * @var string
      */
-    protected $title = '商品';
+    protected $title = '普通商品';
 
     /**
      * Make a grid builder.
@@ -25,7 +25,7 @@ class ProductsController extends AdminController
     protected function grid()
     {
         $grid = new Grid(new Product);
-        $grid->model()->with(['category']);
+        $grid->model()->where('type', Product::TYPE_NORMAL)->with(['category']);
 
         $grid->id('ID')->sorttable();  // 使用sortable()方法把当前列设置为可排序列
 		$grid->title('商品名称');
@@ -62,6 +62,7 @@ class ProductsController extends AdminController
     {
         $form = new Form(new Product);
 
+        $form->hidden('type')->value(Product::TYPE_NORMAL);
         $form->text('title', '商品名称')->rules('required');
         $form->select('category_id', '类目')->options(function ($id) {
             $category = Category::query()->find($id);
