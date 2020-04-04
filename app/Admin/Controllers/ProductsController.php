@@ -2,13 +2,11 @@
 
 namespace App\Admin\Controllers;
 
-use App\Models\Category;
 use App\Models\Product;
-use Encore\Admin\Controllers\AdminController;
 use Encore\Admin\Form;
 use Encore\Admin\Grid;
 
-class ProductsController extends AdminController
+class ProductsController extends CommonProductsController
 {
     /**
      * Title for current resource.
@@ -17,74 +15,28 @@ class ProductsController extends AdminController
      */
     protected $title = '普通商品';
 
-    /**
-     * Make a grid builder.
-     *
-     * @return Grid
-     */
-    protected function grid()
+    public function getProductType()
     {
-        $grid = new Grid(new Product);
-        $grid->model()->where('type', Product::TYPE_NORMAL)->with(['category']);
-
-        $grid->id('ID')->sorttable();  // 使用sortable()方法把当前列设置为可排序列
-		$grid->title('商品名称');
-		$grid->on_sale('已上架')->display(function ($value) {
-			return $value ? '是' : '否';
-		});
-		$grid->price('价格');
-		$grid->rating('评分');
-		$grid->sold_count('销量');
-		$grid->review_count('评论数');
-		$grid->column('category.name', '类目');
-
-		$grid->actions(function ($actions) {
-			$actions->disableView();  // 去掉查看
-			$actions->disableDelete();  // 去掉删除
-		});
-
-		$grid->tools(function ($tools) {
-			// 禁用批量删除按钮
-			$tools->batch(function ($batch) {
-				$batch->disableDelete();
-			});
-		});
-
-        return $grid;
+        return Product::TYPE_NORMAL;
     }
 
-    /**
-     * Make a form builder.
-     *
-     * @return Form
-     */
-    protected function form()
+    protected function customGrid(Grid $grid)
     {
-        $form = new Form(new Product);
+        $grid->model()->with(['category']);
+        $grid->id('ID')->sortable();
+        $grid->title('商品名称');
+        $grid->column('category.name', '类目');
+        $grid->on_sale('已上架')->display(function ($value) {
+            return $value ? '是' : '否';
+        });
+        $grid->price('价格');
+        $grid->rating('评分');
+        $grid->sold_count('销量');
+        $grid->review_count('评论数');
+    }
 
-        $form->hidden('type')->value(Product::TYPE_NORMAL);
-        $form->text('title', '商品名称')->rules('required');
-        $form->select('category_id', '类目')->options(function ($id) {
-            $category = Category::query()->find($id);
-            if ($category) return [ $category->id => $category->full_name ];
-        })->ajax('/admin/api/categories?is_directory=0');
-        $form->image('image', '封面图片')->rules('required|image'); //图片上传功能
-        $form->quill('description', '商品描述')->rules('required');   // 富文本编辑器
-		$form->radio('on_sale', '上架')->options(['1' => '是', '0' => '否'])->default(0);
-
-		// 直接添加一对多的关联模型
-		$form->hasMany('skus', 'SKU 列表', function (Form\NestedForm $form) {
-			$form->text('title', 'SKU 名称')->rules('required');
-			$form->text('description', 'SKU 描述')->rules('required');
-			$form->text('price', '单价')->rules('required|numeric|min:0.01');
-			$form->text('stock', '剩余库存')->rules('required|integer|min:0');
-		});
-
-		// 定义事件回调
-		$form->saving(function (Form $form) {
-			$form->model()->price = collect($form->input('skus'))->where(Form::REMOVE_FLAG_NAME, 0)->min('price') ?: 0;
-		});
-
-        return $form;
+    protected function customForm(Form $form)
+    {
+        // 普通商品没有额外字段
     }
 }
