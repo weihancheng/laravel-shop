@@ -29,7 +29,8 @@ class OrderService {
 					'address' => $address->full_address,
 					'zip' => $address->zip,
 					'contact_name' => $address->contact_name,
-					'contact_phone' => $address->contact_phone
+					'contact_phone' => $address->contact_phone,
+                    'type' => Order::TYPE_NORMAL
 				],
 				'remark' => $remark,
 				'total_amount' => 0
@@ -80,4 +81,52 @@ class OrderService {
 		dispatch(new CloseOrder($order, config('app.order_ttl')));
 		return $order;
 	}
+
+
+	// 新建一个crowdfunding 方法用于众筹商品下订单逻辑
+    public function crowdfunding(User $user, UserAddress $address, ProductSku $sku, $amount)
+    {
+        // 开启事务
+        $order = DB::transaction(function () use($amount, $sku, $address, $user) {
+            // 更新地址的最后使用时间
+            $address->update(['last_user_at' => Carbon::now()]);
+
+            // 创建一个订单
+            $order = new Order([
+                'address' => [
+                    'address' => $address->full_address,
+                    'zip' => $address->zip,
+                    'contact_name' => $address->contact_name,
+                    'contact_address' => $address->contact_phone,
+                    'type' => Order::TYPE_CROWDFUNDING
+                ],
+                'remark' => '',
+                'total_amount' => $sku->price * $amount
+            ]);
+            $order->user()->associate($user);
+            $order->save();
+
+            // 创建一个订单项并与sku关联
+            $item = $order->items()->make([
+                'amount' => $amount,
+                'price' => $sku->price
+            ]);
+            $item->product()->associate($sku->product_id);
+            $item->productSku()->associate($sku);
+            $item->save();
+            // 扣减对应的 sku 库存
+            if ($sku->decreaseStock($amount) <= 0) {
+                throw new InvalidRequestException('该商品库存不足');
+            }
+
+            return $order;
+        });
+
+        // 众筹结束时间减去当前时间得到剩余秒数
+        $crowdfundingTtl = $sku->product->crowdfunding->end_at->getTimestamp() - time();
+        // 剩余秒数与默认订单关闭时间取较小值作为订单关闭时间
+        dispatch(new CloseOrder($order, min(config('app.order_ttl'), $crowdfundingTtl)));
+
+        return $order;
+    }
 }

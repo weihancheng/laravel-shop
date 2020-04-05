@@ -31,6 +31,14 @@ class Order extends Model
 		self::SHIP_STATUS_RECEIVED  => '已收货',
 	];
 
+	const TYPE_NORMAL = 'normal';
+	const TYPE_CROWDFUNDING = 'crowdfunding';
+
+	public static $typeMap = [
+	    self::TYPE_NORMAL => '普通订单',
+        self::TYPE_CROWDFUNDING => '众筹订单'
+    ];
+
 	protected $casts = [
 		'closed' => 'boolean',
 		'reviewed' => 'boolean',
@@ -44,6 +52,7 @@ class Order extends Model
 	];
 
 	protected $fillable = [
+	    'type',
 		'no',
 		'address',
 		'total_amount',

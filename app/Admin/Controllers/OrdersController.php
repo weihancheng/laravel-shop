@@ -5,6 +5,7 @@ namespace App\Admin\Controllers;
 use App\Exceptions\InternalException;
 use App\Exceptions\InvalidRequestException;
 use App\Http\Requests\HandleRefundRequest;
+use App\Models\CrowdfundingProduct;
 use App\Models\Order;
 use Encore\Admin\Controllers\AdminController;
 use Encore\Admin\Grid;
@@ -64,9 +65,19 @@ class OrdersController extends AdminController
     public function ship(Order $order, Request $request)
     {
         // 判断当前的订单是否已支付
-        if (!$order->paid_at) throw new InvalidRequestException('该订单未付款');
+        if (!$order->paid_at) {
+            throw new InvalidRequestException('该订单未付款');
+        }
         // 判断当前订单发货状态是否为未发货
-        if ($order->ship_status !== Order::SHIP_STATUS_PENDING) throw new InvalidRequestException('该订单已发货');
+        if ($order->ship_status !== Order::SHIP_STATUS_PENDING) {
+            throw new InvalidRequestException('该订单已发货');
+        }
+
+        // 众筹订单只有在众筹成功之后才能发货
+        if ($order->type === Order::TYPE_CROWDFUNDING &&
+            $order->items[0]->product->crowdfunding->status !== CrowdfundingProduct::STATUS_SUCCESS) {
+            throw new InvalidRequestException('众筹订单只能在众筹成功后发货');
+        }
 
         $data = $this->validate($request, [
             'express_company' => ['required'],
@@ -124,7 +135,7 @@ class OrdersController extends AdminController
             case 'wechat':
                 $refundNo = Order::getAvailableRefundNo();
                 app('wechat_pay')->refund([
-                   'out_trade_no' => $order->no,
+                    'out_trade_no' => $order->no,
                     'total_fee' => $order->total_amount * 100,
                     'refund_fee' => $order->total_amount * 100,
                     'out_refund_no' => $refundNo,  //退款订单号

@@ -61,8 +61,11 @@ Route::group(['middleware' => ['auth', 'verified']], function() {
     Route::post('orders/{order}/review', 'OrdersController@sendReview')->name('orders.review.store');
     // 申请退款
     Route::post('orders/{order}/apply_refund', 'OrdersController@applyRefund')->name('orders.apply_refund');
+    // 创建众筹商品订单
+    Route::post('crowdfunding_orders', 'OrdersController@crowdfunding')->name('crowdfunding_orders.store');
     // 查看优惠劵
     Route::get('coupon_codes/{code}', 'CouponCodesController@show')->name('coupon_codes.show');
+
 });
 
 // 这里和其他路由产生冲突
