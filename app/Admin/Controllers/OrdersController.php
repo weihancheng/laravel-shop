@@ -140,7 +140,7 @@ class OrdersController extends AdminController
                     'refund_fee' => $order->total_amount * 100,
                     'out_refund_no' => $refundNo,  //退款订单号
 //                    'notify_url' => 'http://requestbin.fullcontact.com/******'  // 测试环境
-                    'notify_url' => route('payment.wechat.refund_notify')
+                    'notify_url' => ngrok_url('payment.wechat.refund_notify')
                 ]);
 
                 // 将订单状态改成退款中

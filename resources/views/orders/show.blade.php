@@ -61,8 +61,7 @@
                             {{-- 输出物流信息start --}}
                             <div class="line">
                                 <div class="line-label">物流状态：</div>
-                                <div
-                                    class="line-value">{{ \App\Models\Order::$shipStatusMap[$order->ship_status] }}</div>
+                                <div class="line-value">{{ \App\Models\Order::$shipStatusMap[$order->ship_status] }}</div>
                             </div>
                             @if($order->ship_status)
                                 <div class="line">
@@ -137,8 +136,8 @@
                             @endif
                             {{-- 订单已支付,且退款状态是未退款时展示申请退款按钮 --}}
                             @if($order->paid_at &&
-                                $order->refund_status === \App\Models\Order::REFUND_STATUS_PENDING
-                                $order->tyep !== \App\Models\Order::TYPE_CROWDFUNDING)
+                                $order->refund_status === \App\Models\Order::REFUND_STATUS_PENDING &&
+                                $order->type !== \App\Models\Order::TYPE_CROWDFUNDING)
                                 <div class="refund-button">
                                     <button class="btn btn-sm btn-danger" id="btn-apply-refund">申请退款</button>
                                 </div>
