@@ -235,4 +235,17 @@ return [
 
 	// 订单持续时间
 	'order_ttl' => 1800,
+
+    // 分期费率, key为期数, value为费率
+    'installment_fee_rate' => [
+        3 => 1.5,
+        6 => 2,
+        12 => 2.5
+    ],
+
+    // 最低分期金额
+    'min_installment_amount' => 300,
+
+    // 逾期日息
+    'installment_fine_rate' => 0.05,
 ];

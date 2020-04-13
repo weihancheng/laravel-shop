@@ -41,18 +41,20 @@ Route::group(['middleware' => ['auth', 'verified']], function() {
 	Route::get('cart', 'CartController@index')->name('cart.index');
 	// 移除购物车
 	Route::delete('cart/{sku}', 'CartController@remove')->name('cart.remove');
-	// 创建订单
-	Route::post('orders', 'OrdersController@store')->name('orders.store');
-	// 订单列表
-	Route::get('orders', 'OrdersController@index')->name('orders.index');
-	// 订单页
-	Route::get('orders/{order}', 'OrdersController@show')->name('orders.show');
 	// 支付宝支付
     Route::get('payment/{order}/alipay', 'PaymentController@payByAlipay')->name('payment.alipay');
     // 支付宝支付前端回调
     Route::get('payment/alipay/return', 'PaymentController@alipayReturn')->name('payment.alipay.return');
     // 微信支付
     Route::get('payment/{order}/wechat', 'PaymentController@payByWechat')->name('payment.wechat');
+    // 创建分期付款
+    Route::post('payment/{order}/installment', 'PaymentController@payByInstallment')->name('payment.installment');
+    // 创建订单
+    Route::post('orders', 'OrdersController@store')->name('orders.store');
+    // 订单列表
+    Route::get('orders', 'OrdersController@index')->name('orders.index');
+    // 订单页
+    Route::get('orders/{order}', 'OrdersController@show')->name('orders.show');
     // 收货
     Route::post('orders/{order}/received', 'OrdersController@received')->name('orders.received');
     // 评价页面

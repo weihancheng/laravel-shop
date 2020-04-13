@@ -12,7 +12,7 @@ class Installment extends Model
         'no',
         'total_amount',
         'count',
-        'free_rate',
+        'fee_rate',
         'fine_rate',
         'status'
     ];
@@ -34,7 +34,7 @@ class Installment extends Model
             // 如果模型的no为空
             if (!$model->no) {
                 // 调用 findAvailableNo 生成流水单号
-                $model->no = $this->findAvailableNo();
+                $model->no = static::findAvailableNo();
                 // 如果生成失败, 则终止订单创建
                 if (!$model->no) {
                     return false;
@@ -58,7 +58,7 @@ class Installment extends Model
         return $this->hasMany(InstallmentItem::class);
     }
 
-    public function findAvailableNo()
+    public static function findAvailableNo()
     {
         // 分期流水号前缀
         $prefix = date('YmdHis');
