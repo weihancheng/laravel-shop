@@ -19,12 +19,12 @@ class Installment extends Model
 
     const STATUS_PENDING = 'pending';
     const STATUS_REPAYING = 'repaying';
-    const STATUS_FINISH = 'finish';
+    const STATUS_FINISHED = 'finished';
 
     public static $statusMap = [
         self::STATUS_REPAYING => '还款中',
         self::STATUS_PENDING => '待还款',
-        self::STATUS_FINISH => '已完成'
+        self::STATUS_FINISHED => '已完成'
     ];
 
     protected static function boot()
