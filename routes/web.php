@@ -67,6 +67,8 @@ Route::group(['middleware' => ['auth', 'verified']], function() {
     Route::post('crowdfunding_orders', 'OrdersController@crowdfunding')->name('crowdfunding_orders.store');
     // 查看优惠劵
     Route::get('coupon_codes/{code}', 'CouponCodesController@show')->name('coupon_codes.show');
+    // 分期付款列表
+    Route::get('installments', 'InstallmentsController@index')->name('installments.index');
 
 });
 
