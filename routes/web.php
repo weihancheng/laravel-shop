@@ -69,6 +69,8 @@ Route::group(['middleware' => ['auth', 'verified']], function() {
     Route::get('coupon_codes/{code}', 'CouponCodesController@show')->name('coupon_codes.show');
     // 分期付款列表
     Route::get('installments', 'InstallmentsController@index')->name('installments.index');
+    // 分期付款详情
+    Route::get('installments/{installment}', 'InstallmentsController@show')->name('installments.show');
 
 });
 
