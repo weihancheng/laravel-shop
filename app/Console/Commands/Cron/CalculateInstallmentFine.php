@@ -50,7 +50,7 @@ class CalculateInstallmentFine extends Command
             ->chunkById(1000, function ($items) {
                 foreach ($items as $item) {
                     // 通过Carbon对象的diffInDays直接得到逾期天数
-                    $overdueDays = Carbon::now()->diffInDays($items->due_date);
+                    $overdueDays = Carbon::now()->diffInDays($item->due_date);
                     // 本金和手续费之和
                     $base = big_number($item->base)->add($item->fee)->getValue();
                     // 计算逾期费
