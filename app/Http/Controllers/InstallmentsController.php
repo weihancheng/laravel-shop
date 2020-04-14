@@ -7,6 +7,7 @@ use App\Exceptions\InvalidRequestException;
 use App\Models\Installment;
 use App\Models\Order;
 use Carbon\Carbon;
+use Endroid\QrCode\QrCode;
 use Illuminate\Http\Request;
 
 class InstallmentsController extends Controller
@@ -16,7 +17,6 @@ class InstallmentsController extends Controller
     {
         $installments = Installment::query()
             ->where('user_id', $request->user()->id)
-            ->where('status', Installment::STATUS_PENDING)
             ->paginate(10);
 
         return view('installments.index', compact('installments'));
@@ -49,6 +49,10 @@ class InstallmentsController extends Controller
         }
 
         // 调用支付宝的网页支付
+        /*
+         * app('alipay')->web() 方法的参数中传入 notify_url 和 return_url
+         * 来覆盖掉之前在 AppServiceProvider::register() 方法中初始化支付宝支付实例时设置的前后端回调地址。
+         */
         return app('alipay')->web([
             'out_trade_no' => $installment->no . '_' . $nextItem->sequence,
             'total_amount' => $nextItem->total,
@@ -57,10 +61,7 @@ class InstallmentsController extends Controller
             'notify_url' => ngrok_url('installments.alipay.notify'),
             'retrun_url' => ngrok_url('installments.alipay.return')
         ]);
-        /*
-         * app('alipay')->web() 方法的参数中传入 notify_url 和 return_url
-         * 来覆盖掉之前在 AppServiceProvider::register() 方法中初始化支付宝支付实例时设置的前后端回调地址。
-         */
+
     }
 
     public function alipayReturn()
@@ -80,32 +81,52 @@ class InstallmentsController extends Controller
         $data = app('alipay')->verify();
         // 如果订单状态不是成功或者结束, 则不走后续逻辑
         if (!in_array($data->trade_status, ['TRADE_SUCCESS', 'TRADE_FINISHED'])) {
-            return app('alipay')->success;
+            return app('alipay')->success();
         }
+
+        if ($this->paid($data->out_trade_no, 'alipay', $data->trade_no)) {
+            return app('alipay')->success();
+        }
+
+        return 'fail';
+    }
+
+    public function wechatNotify()
+    {
+        $data = app('wechat_pay')->verify();
+        if ($this->paid($data->out_trade_no, 'wechat', $data->transaction_id)) {
+            return app('wechat_pay')->success();
+        }
+
+        return 'fail';
+    }
+
+    protected function paid($outTradeNo, $paymentMethod, $paymentNo)
+    {
         // 拉起支付时使用的支付订单号是由分期流水号 + 还款计划编号组成的
         // 因此可以通过支付宝订单号来还原出这笔还款是哪个分期付款的哪个还款计划
-        list($no, $sequence) = explode('_', $data->out_trade_no);
+        list($no, $sequence) = explode('_', $outTradeNo);
         // 根据分期流水号查询对应的分期记录, 原则上不会找不到, 这里判断只是增强代码健壮性
         if (!$installment = Installment::where('no', $no)->first()) {
-            return 'fail';
+            return false;
         }
 
         if (!$item = $installment->items()->where('sequence', $sequence)->first()) {
-            return 'fail';
+            return false;
         }
 
         // 如果这个还款计划的支付状态是已支付, 则告知支付宝此订单已完成, 并不执行后续逻辑
         if ($item->paid_at) {
-            return app('alipay')->success();
+            return true;
         }
 
         // 使用事务,保证数据一致性
-        \DB::transaction(function () use ($data, $no, $installment, $item) {
+        \DB::transaction(function () use ($paymentNo, $paymentMethod, $no, $installment, $item) {
             // 更新对应的还款计划
             $item->update([
                 'paid_at' => Carbon::now(), //支付时间
-                'payment_method' => 'alipay', // 支付方式
-                'payment_no' => $data->trade_no, //支付宝订单号
+                'payment_method' => $paymentMethod, // 支付方式
+                'payment_no' => $paymentNo, //支付宝订单号
             ]);
 
             // 如果这是第一笔还款
@@ -131,6 +152,34 @@ class InstallmentsController extends Controller
             }
         });
 
-        return app('alipay')->success();
+        return true;
+    }
+
+    public function payByWechat(Installment $installment)
+    {
+        if ($installment->order->closed) {
+            throw new InvalidRequestException('对应的商品订单已被关闭');
+        }
+
+        if ($installment->status === Installment::STATUS_FINISHED) {
+            throw new InvalidRequestException('该分期付款已结清');
+        }
+
+        if (!$nextItem = Installment::query()->items()->whereNull('paid_at')->orderBy('sequence')->first()) {
+            throw new InvalidRequestException('该分期付款已结清');
+        }
+
+        $wechatOrder = app('wechat_pay')->scan([
+           'out_trade_no' => $installment->no . '_' . $nextItem->sequence,
+            'total_fee' => $nextItem->total * 100,
+            'body' => '支付 Laravel Shop的分期订单:' . $installment->no,
+            'notify_url' => ngrok_url('installments.wechat.notify')
+        ]);
+
+        // 把要转换的字符串作为Qrcode的构造函数参数
+        $qrCode = new QrCode($wechatOrder);
+
+        // 将生成的二维码图片数据以字符串形式输出, 并带上相应的响应类型
+        return response($qrCode->writeString(), 200, ['Content-type' => $qrCode->getContentType()]);
     }
 }
