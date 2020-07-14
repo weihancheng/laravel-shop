@@ -18,3 +18,4 @@ class CouponCodesController extends Controller
         return $record;
     }
 }
+
